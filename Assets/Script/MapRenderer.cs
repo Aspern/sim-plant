@@ -4,31 +4,45 @@ using UnityEngine;
 
 public class MapRenderer : MonoBehaviour
 {
-    private Dictionary<string, GameObject> _tiles;
+    private GameObject[] _tiles = new GameObject[5];
     private MapData _mapData;
 
     private void Awake() {
         _mapData = GameObject.Find("Map").GetComponent<MapData>();
 
-        _tiles = new Dictionary<string, GameObject> { { "inner_corner", Resources.Load<GameObject>("fbx/inner_corner") } };
+        _tiles[0] = Resources.Load<GameObject>("fbx/water");
+        _tiles[1] = Resources.Load<GameObject>("fbx/edge");
+        _tiles[2] = Resources.Load<GameObject>("fbx/corner");
+        _tiles[3] = Resources.Load<GameObject>("fbx/inner_corner");
+        _tiles[4] = Resources.Load<GameObject>("fbx/plain");
     }
 
     void Start() {
-        var innerCorner1 = Instantiate(_tiles["inner_corner"]) as GameObject;
-        innerCorner1.transform.position = new Vector3(0, 0, 0);
-        innerCorner1.transform.localEulerAngles = new Vector3(0, 0, -90);
+        for (int x = 0; x < MapData.dimension; x++) {
+            for (int y = 0; y < MapData.dimension; y++) {
+                InstantiateTileAt(x, y);
+            }
+        }
+    }
 
-        var innerCorner2 = Instantiate(_tiles["inner_corner"]) as GameObject;
-        innerCorner2.transform.position = new Vector3(1, 0, 0);
-        
-        var innerCorner3 = Instantiate(_tiles["inner_corner"]) as GameObject;
-        innerCorner3.transform.position = new Vector3(0, 1, 0);
-        innerCorner3.transform.localEulerAngles = new Vector3(0, 0, 180);
+    private void InstantiateTileAt(int x, int y) {
+        var mapData = _mapData.getDataAt(x, y);
 
-        var innerCorner4 = Instantiate(_tiles["inner_corner"]) as GameObject;
-        innerCorner4.transform.position = new Vector3(1, 1, 0);
-        innerCorner4.transform.localEulerAngles = new Vector3(0, 0, 90);
+        GameObject tile = Instantiate(_tiles[mapData / 4]) as GameObject;
 
+        switch (mapData % 4) {
+            case 1:
+                tile.transform.localEulerAngles = new Vector3(0, 0, 90);
+                break;
+            case 2:
+                tile.transform.localEulerAngles = new Vector3(0, 0, 180);
+                break;
+            case 3:
+                tile.transform.localEulerAngles = new Vector3(0, 0, 270);
+                break;
+        }
+
+        if(tile != null) tile.transform.position = new Vector3(x, y, 0);
     }
 
     void Update()
