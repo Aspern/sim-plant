@@ -92,14 +92,14 @@ public class SimPlant : MonoBehaviour
 
     public void OnGrowthChanged(Tile tile)
     {
-        if (selectedTile.GetComponent<Tile>().Equals(tile))
+        if (selectedTile && selectedTile.GetComponent<Tile>().Equals(tile))
         {
             EnableActionButton(ActionType.NECTAR);
         }
     }
     public void OnFlourishedChanged(Tile tile)
     {
-        if (selectedTile.GetComponent<Tile>().Equals(tile))
+        if (selectedTile && selectedTile.GetComponent<Tile>().Equals(tile))
         {
             EnableActionButton(ActionType.BEE);
         }
@@ -107,7 +107,7 @@ public class SimPlant : MonoBehaviour
     
     public void OnPollinatedChanged(Tile tile)
     {
-        if (selectedTile.GetComponent<Tile>().Equals(tile))
+        if (selectedTile && selectedTile.GetComponent<Tile>().Equals(tile))
         {
             EnableActionButton(ActionType.SEED);
         }
