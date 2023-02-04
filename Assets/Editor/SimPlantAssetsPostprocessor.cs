@@ -27,7 +27,7 @@ namespace Editor {
             MeshFilter[] meshes = gameObject.GetComponentsInChildren<MeshFilter>(true);
 
             foreach (var meshFilter in meshes) {
-                RotateMesh(meshFilter, Quaternion.Euler(0f, 180f, 0f));
+                RotateMesh(meshFilter, Quaternion.Euler(-90f, 0f, 180f));
                 AddMaterials(meshFilter);
             }
             
