@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class TileClickListener : MonoBehaviour
 {
     private Camera _camera;
-    private MapData _mapData; 
     private readonly List<Button> _actionButtons = new();
+    private TileMap _tileMap;
 
-    
     private void Awake()
     {
-        // _mapData = GameObject.Find("Map").GetComponent<MapData>();
+        _tileMap = GameObject.Find("Map").GetComponent<TileMap>();
         _camera = Camera.main;
+
         for (var i = 1; i < 5; i++)
         {
-            _actionButtons.Add( GameObject.Find("ActionButton" + i).GetComponent<Button>());
+            _actionButtons.Add(GameObject.Find("ActionButton" + i).GetComponent<Button>());
         }
     }
 
@@ -28,25 +28,33 @@ public class TileClickListener : MonoBehaviour
     private void DetectObjectWithRaycast()
     {
         if (!Input.GetMouseButtonDown(0)) return;
+        // Ignore UI clicks
         if (EventSystem.current.IsPointerOverGameObject()) return;
-
-        _actionButtons.ForEach(button => button.interactable = false);
+        
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-        if (!Physics.Raycast(ray, out var hit)) return;
-        
-        Debug.Log(hit.collider.name);
-        
-        if (!hit.collider.name.Contains("corner")) return;
-        
-        _actionButtons.ForEach(button => button.interactable = true);
+        if (Physics.Raycast(ray, out var hit)) // Found a GameObj by Left Mouse Click
+        {
+            var gameObj = hit.collider.gameObject;
+            var tile = gameObj.GetComponent<Tile>();
 
-        var gameObj = hit.collider.gameObject;
-        var gameObjPos = gameObj.transform.position;
-        
-        // var tileData = _mapData.getTileDataByPos(gameObjPos.x, gameObjPois.y)
-        // TODO: Change Actions dependent on tileData
+            if (tile)
+            {
+                _actionButtons.ForEach(button => button.interactable = true);
+                _tileMap.SelectTile(tile);
+
+                // TODO: pass game object to a renderer to select it
+            }
+            else // Disable actions and remove selection if game obj is not a tile
+            {
+                _tileMap.SelectTile(tile);
+                _actionButtons.ForEach(button => button.interactable = false);
+            }
+        }
+        else // Disable actions and remove selection if click anywhere in map
+        {
+            _tileMap.UnselectTile();
+            _actionButtons.ForEach(button => button.interactable = false);
+        }
     }
-
-
 }

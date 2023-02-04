@@ -1,4 +1,6 @@
-﻿public class Tile
+﻿using UnityEngine;
+
+public class Tile: MonoBehaviour
 {
     public TileType type;
 }
