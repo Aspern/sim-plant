@@ -10,6 +10,12 @@ public class Tile : MonoBehaviour
     public bool Pollinated { get; set; }
 
     private GameObject _plantGameObj;
+    
+    private MapData _mapData;
+
+    private void Awake() {
+        _mapData = GameObject.Find("Map").GetComponent<MapData>();
+    }
 
     public void UseNectar()
     {
@@ -29,6 +35,7 @@ public class Tile : MonoBehaviour
         {
             InstantiatePlant();
         }
+        _mapData.AddTile(this);
     }
 
     private void InstantiatePlant()
