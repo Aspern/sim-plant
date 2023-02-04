@@ -11,6 +11,30 @@ public class CameraMovement : MonoBehaviour {
         {
             transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) *
                                   (moveSpeed * Time.deltaTime);
+            if (transform.position.x > 25)
+            {
+                var position = transform.position;
+                position.Set(25, position.y, position.z);
+                transform.position = position;
+            }
+            if (transform.position.z > 25)
+            {
+                var position = transform.position;
+                position.Set(position.x, position.y, 25);
+                transform.position = position;
+            }
+            if (transform.position.x < -10)
+            {
+                var position = transform.position;
+                position.Set(-10, position.y, position.z);
+                transform.position = position;
+            }
+            if (transform.position.z < -10)
+            {
+                var position = transform.position;
+                position.Set(position.x, position.y, -10);
+                transform.position = position;
+            }
         }
         
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
