@@ -61,6 +61,8 @@ public class Tile : MonoBehaviour
         ActionHandler?.Invoke(ActionType.BEE, false);
         ActionHandler?.Invoke(ActionType.SEED, false);
         ActionHandler?.Invoke(ActionType.NECTAR, false);
+        Pollinated = false;
+        flourished = false;
 
         LeanTween.move(seedGameObj, neighbour.transform.position, 3).setOnComplete(() =>
         {
@@ -69,8 +71,7 @@ public class Tile : MonoBehaviour
                 neighbour.planted = true;
                 neighbour.InstantiatePlant();
             }
-            Pollinated = false;
-            flourished = false;
+        
             var plant = _plantGameObj.GetComponent<TreePlant>();
             plant.Pollinated = false;
             plant.RemoveFlower();
