@@ -42,7 +42,7 @@ public class MapRenderer : MonoBehaviour
                 break;
         }
 
-        if(tile != null) tile.transform.position = new Vector3(x, y, 0);
+        if(tile != null) tile.transform.position = new Vector3(x + 0.5f, y + 0.5f , 0);
     }
 
     void Update()
