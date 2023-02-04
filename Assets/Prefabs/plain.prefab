@@ -98,6 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939e8d98c1374a1c96826b9b1bb8f00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantPrefab: {fileID: 408812747697325660, guid: d701b1780e09dfa47977d6128e7ec4f4,
+    type: 3}
+  type: 4
+  planted: 0
 --- !u!65 &8915246231888907501
 BoxCollider:
   m_ObjectHideFlags: 0
