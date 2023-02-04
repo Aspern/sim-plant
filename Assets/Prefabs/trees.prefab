@@ -125,5 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantPrefab: {fileID: 408812747697325660, guid: d701b1780e09dfa47977d6128e7ec4f4,
     type: 3}
-  type: 0
+  type: 6
   planted: 0
+  plantGrown: 0
+  flourished: 0

@@ -84,11 +84,10 @@ public class MapData : MonoBehaviour
     public void AddTile(Tile tile)
     {
         var position = tile.gameObject.transform.position;
-        _tiles.Add(new TileStruct(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z), tile));
+        _tiles.Add(new TileStruct(((int)position.x), (int)position.z, tile));
     }
 
     public Tile GetTileAt(int x, int y) {
-        Debug.Log(_tiles.Count);
         foreach (var tileStruct in _tiles) {
             if (tileStruct.x == x && tileStruct.y == y) {
                 return tileStruct.tile;

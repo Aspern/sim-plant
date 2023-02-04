@@ -44,23 +44,18 @@ public class Tile : MonoBehaviour
     {
         var neighbors = new List<Tile>();
         var position = gameObject.transform.position;
-        var x = Mathf.RoundToInt(position.x);
-        var y = Mathf.RoundToInt(position.z);
-        
-        Debug.Log($"MyPosition({x}, {y})");
+        var x = (int)(position.x);
+        var y = (int)(position.z);
 
         for (var i = x - 1; i < x + 2; i++)
         {
             for (var j = y - 1; j < y + 2; j++)
             {
                 if (i == x && j == y) continue;
-                Debug.Log($"GetTileAt({i}, {j})");
                 var neighborsTile = _mapData.GetTileAt(i, j);
                
                 if (neighborsTile != null)
-                { 
-                    
-                    Debug.Log($"FoundNeighbour({neighborsTile.type}");
+                {
                     neighbors.Add(neighborsTile);
                 }
             }
