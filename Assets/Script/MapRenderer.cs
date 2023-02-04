@@ -3,12 +3,10 @@ using UnityEngine;
 public class MapRenderer : MonoBehaviour
 {
     private GameObject[] _tiles = new GameObject[7];
-    private TileMap _tileMap;
     private MapData _mapData;
 
     private void Awake() {
         _mapData = GameObject.Find("Map").GetComponent<MapData>();
-        _tileMap = GameObject.Find("Map").GetComponent<TileMap>();
 
         _tiles[0] = Resources.Load<GameObject>("fbx/water");
         _tiles[1] = Resources.Load<GameObject>("fbx/edge");
@@ -38,9 +36,7 @@ public class MapRenderer : MonoBehaviour
 
        // var type = TileTypes.findById(tileId);
         var tile = tileGameObj.GetComponent<Tile>();
-        
-        _tileMap.AddTile(x, y, tile);
-        
+
         //tileGameObj.GetComponent<Tile>().type = type;
 
         switch (mapData % 4) {
