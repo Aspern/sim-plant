@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Tile: MonoBehaviour
 {
@@ -13,6 +12,7 @@ public class Tile: MonoBehaviour
     {
         var plantGameObj = Instantiate(plantPrefab);
         plantGameObj.transform.position = gameObject.transform.position;
+        plantGameObj.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 
     private void Start()
