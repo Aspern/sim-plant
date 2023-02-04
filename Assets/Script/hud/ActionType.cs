@@ -1,5 +1,5 @@
 ﻿
-public enum Action
+public enum ActionType
 {
     NECTAR,
     BEE,

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -47,25 +46,25 @@ public class SimPlant : MonoBehaviour
 
     public void EnableAllActionButtons()
     {
-        _actionButtons.ForEach(button => button.interactable = false);
+        _actionButtons.ForEach(button => button.interactable = true);
     }
 
     public void DisableAllActionButtons()
     {
-        _actionButtons.ForEach(button => button.interactable = true);
+        _actionButtons.ForEach(button => button.interactable = false);
     }
 
-    public void EnableActionButton(Action action)
+    public void EnableActionButton(ActionType action)
     {
-        ChangeActionButtonInteractive(action, false);
+        ChangeActionButtonInteractive(action, true);
     }
     
-    public void DisableActionButton(Action action)
+    public void DisableActionButton(ActionType action)
     {
         ChangeActionButtonInteractive(action, false);
     }
 
-    private void ChangeActionButtonInteractive(Action action, bool interactive)
+    private void ChangeActionButtonInteractive(ActionType action, bool interactive)
     {
         _actionButtons.ForEach(button =>
         {

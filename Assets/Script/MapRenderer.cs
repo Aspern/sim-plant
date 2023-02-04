@@ -53,9 +53,4 @@ public class MapRenderer : MonoBehaviour
 
         if(tileGameObj != null) tileGameObj.transform.position = new Vector3(x + 0.5f, 0 , y + 0.5f);
     }
-
-    void Update()
-    {
-        
-    }
 }

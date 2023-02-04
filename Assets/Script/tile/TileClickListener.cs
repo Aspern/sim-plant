@@ -40,7 +40,7 @@ public class TileClickListener : MonoBehaviour
                 {
                     if (tile.PlantGrown)
                     {
-                        _simPlant.EnableActionButton(Action.NECTAR);
+                        _simPlant.EnableActionButton(ActionType.NECTAR);
                     }
                 }
                 else
