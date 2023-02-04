@@ -15,9 +15,4 @@ public class MainMenu : MonoBehaviour
         Debug.Log("QUIT!");
         Application.Quit();
     }
-
-    public void Awake (){
-        Debug.Log("Hallo Welt");
-         mixer.SetFloat("MusicVol", Mathf.Log10(0.5f) * 20);
-    }
-}
+} 
