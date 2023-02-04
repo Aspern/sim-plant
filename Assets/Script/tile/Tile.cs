@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
@@ -8,6 +9,7 @@ public class Tile : MonoBehaviour
     public bool planted;
     public bool plantGrown;
     public bool flourished;
+    private bool propagated = false;
     public bool Pollinated { get; set; }
 
     private GameObject _plantGameObj;
@@ -17,6 +19,7 @@ public class Tile : MonoBehaviour
     private void Awake()
     {
         _mapData = GameObject.Find("Map").GetComponent<MapData>();
+        
     }
 
     public void UseNectar()
@@ -33,11 +36,19 @@ public class Tile : MonoBehaviour
 
     public void UseSeed()
     {
-        if (!Pollinated) return;
+        if (!Pollinated || propagated) return;
 
         var neighborsTiles = FindNeighborsTiles();
-
-        neighborsTiles.ForEach(tile => { Debug.Log($"{tile.type}"); });
+        foreach (Tile tile in neighborsTiles)
+        {
+            if (tile.type == TileType.PLAIN) 
+            {
+                tile.planted = true;
+                tile.InstantiatePlant();
+                propagated = true;
+                break;
+            }
+        }
     }
 
     private List<Tile> FindNeighborsTiles()
@@ -74,7 +85,7 @@ public class Tile : MonoBehaviour
         _mapData.AddTile(this);
     }
 
-    private void InstantiatePlant()
+    public void InstantiatePlant()
     {
         var parentTransform = transform;
         _plantGameObj = Instantiate(
