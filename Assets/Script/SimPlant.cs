@@ -73,6 +73,11 @@ public class SimPlant : MonoBehaviour
     {
         selectedTile.GetComponent<Tile>().UseBee();
     }
+    
+    public void UseSeedAction()
+    {
+        selectedTile.GetComponent<Tile>().UseSeed();
+    }
 
     private void ChangeActionButtonInteractive(ActionType action, bool interactive)
     {

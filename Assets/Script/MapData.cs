@@ -81,11 +81,14 @@ public class MapData : MonoBehaviour
         return data[y, x];
     }
 
-    public void AddTile(Tile tile) {
-        _tiles.Add(new TileStruct(Mathf.RoundToInt(tile.gameObject.transform.position.x), Mathf.RoundToInt(tile.gameObject.transform.position.x), tile));
+    public void AddTile(Tile tile)
+    {
+        var position = tile.gameObject.transform.position;
+        _tiles.Add(new TileStruct(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z), tile));
     }
 
     public Tile GetTileAt(int x, int y) {
+        Debug.Log(_tiles.Count);
         foreach (var tileStruct in _tiles) {
             if (tileStruct.x == x && tileStruct.y == y) {
                 return tileStruct.tile;
