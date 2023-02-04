@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public partial class TileClickListener : MonoBehaviour
@@ -27,7 +28,9 @@ public partial class TileClickListener : MonoBehaviour
     private void DetectObjectWithRaycast()
     {
         if (!Input.GetMouseButtonDown(0)) return;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
 
+        _actionButtons.ForEach(button => button.interactable = false);
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
 
         if (!Physics.Raycast(ray, out var hit)) return;
@@ -36,7 +39,6 @@ public partial class TileClickListener : MonoBehaviour
         
         if (!hit.collider.name.Contains("corner")) return;
         
-        // TODO: Check if tile can use actions and activate or deactivate them
         _actionButtons.ForEach(button => button.interactable = true);
 
         var gameObj = hit.collider.gameObject;
