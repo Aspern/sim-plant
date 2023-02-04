@@ -85,12 +85,18 @@ public class SimPlant : MonoBehaviour
         });
     }
 
-    public void OnGrowthChanged()
+    public void OnGrowthChanged(Tile tile)
     {
-        EnableActionButton(ActionType.NECTAR);
+        if (selectedTile.GetComponent<Tile>().Equals(tile))
+        {
+            EnableActionButton(ActionType.NECTAR);
+        }
     }
-    public void OnFlourishedChanged()
+    public void OnFlourishedChanged(Tile tile)
     {
-        EnableActionButton(ActionType.BEE);
+        if (selectedTile.GetComponent<Tile>().Equals(tile))
+        {
+            EnableActionButton(ActionType.BEE);
+        }
     }
 }

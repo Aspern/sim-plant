@@ -44,13 +44,13 @@ public class Tile : MonoBehaviour
 
     public void OnFullyGrown()
     {
-        Flourished = true;
-        GameObject.Find("Map").GetComponent<SimPlant>().OnGrowthChanged();
+        PlantGrown = true;
+        GameObject.Find("Map").GetComponent<SimPlant>().OnGrowthChanged(this);
     }
     
     public void OnFlourished()
     {
         Flourished = true;
-        GameObject.Find("Map").GetComponent<SimPlant>().OnFlourishedChanged();
+        GameObject.Find("Map").GetComponent<SimPlant>().OnFlourishedChanged(this);
     }
 }

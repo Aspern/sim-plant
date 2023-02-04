@@ -13,7 +13,6 @@ public class Flower : MonoBehaviour
     {
         LeanTween.scale(gameObject, new Vector3(1, 1, 1), initialGrowTime).setOnComplete(o =>
         {
-            Debug.Log("OnComplete");
             gameObject.GetComponentInParent<Tile>().OnFlourished();
         });
     }
