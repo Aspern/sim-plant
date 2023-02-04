@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,6 +51,19 @@ public class MapData : MonoBehaviour
         { 5,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16, 7, 0, 9, 4, 4, 4, 4, 4, 4, 4, 8, 0 },
         { 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
     };
+
+    struct TileStruct {
+        public int x;
+        public int y;
+        public Tile tile;
+
+        public TileStruct(int x, int y, Tile tile) {
+            this.x = x;
+            this.y = y;
+            this.tile = tile;
+        }
+    }
+    private List<TileStruct> _tiles = new List<TileStruct>();
     
     void Start() { }
 
@@ -65,5 +79,18 @@ public class MapData : MonoBehaviour
         }
 
         return data[y, x];
+    }
+
+    public void AddTile(Tile tile) {
+        _tiles.Add(new TileStruct(Mathf.RoundToInt(tile.gameObject.transform.position.x), Mathf.RoundToInt(tile.gameObject.transform.position.x), tile));
+    }
+
+    public Tile GetTileAt(int x, int y) {
+        foreach (var tileStruct in _tiles) {
+            if (tileStruct.x == x && tileStruct.y == y) {
+                return tileStruct.tile;
+            }
+        }
+        return null;
     }
 }
