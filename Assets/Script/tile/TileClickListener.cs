@@ -42,6 +42,11 @@ public class TileClickListener : MonoBehaviour
                     {
                         _simPlant.EnableActionButton(ActionType.NECTAR);
                     }
+
+                    if (tile.Flourished)
+                    {
+                        _simPlant.EnableActionButton(ActionType.BEE);
+                    }
                 }
                 else
                 {

@@ -3,6 +3,9 @@
 public class TreePlant :  MonoBehaviour
 {
     public float initialGrowTime = 60f;
+    public GameObject flowerPrefab;
+
+    private GameObject _flowerGameObj;
 
     private void Awake()
     {
@@ -15,5 +18,19 @@ public class TreePlant :  MonoBehaviour
         {
             gameObject.GetComponentInParent<Tile>().PlantGrown = true;
         });
+    }
+    
+    public void CreateFlower()
+    {
+        
+        if(_flowerGameObj) return;
+
+        var parentTransform = transform;
+        _flowerGameObj = Instantiate(
+            flowerPrefab,
+            parentTransform.position,
+            Quaternion.identity,
+            parentTransform
+        );
     }
 }
