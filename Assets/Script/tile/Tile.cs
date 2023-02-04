@@ -1,25 +1,28 @@
-﻿using System.Collections.Generic;
-using Unity.VisualScripting;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
     public GameObject plantPrefab;
+    public GameObject seedPrefab;
     public TileType type;
     public bool planted;
     public bool plantGrown;
     public bool flourished;
-    private bool propagated = false;
     public bool Pollinated { get; set; }
+    public Action<ActionType, bool> ActionHandler { get; set; }
 
     private GameObject _plantGameObj;
 
     private MapData _mapData;
+    private Compass _compass;
 
     private void Awake()
     {
         _mapData = GameObject.Find("Map").GetComponent<MapData>();
-        
+        _compass = GameObject.Find("Compass").GetComponent<Compass>();
     }
 
     public void UseNectar()
@@ -36,44 +39,61 @@ public class Tile : MonoBehaviour
 
     public void UseSeed()
     {
-        if (!Pollinated || propagated) return;
+        if (!Pollinated) return;
+
+
+        var parentTransform = transform;
+        var position = parentTransform.position;
+        position.y += 1;
+        var seedGameObj = Instantiate(
+            seedPrefab,
+            position,
+            Quaternion.identity,
+            parentTransform
+        );
+
 
         var neighborsTiles = FindNeighborsTiles();
-        foreach (Tile tile in neighborsTiles)
+        var neighbour = neighborsTiles[_compass.CurrentDirection];
+
+        if (!neighbour) return;
+
+        ActionHandler?.Invoke(ActionType.BEE, false);
+        ActionHandler?.Invoke(ActionType.SEED, false);
+        ActionHandler?.Invoke(ActionType.NECTAR, false);
+
+        LeanTween.move(seedGameObj, neighbour.transform.position, 3).setOnComplete(() =>
         {
-            if (tile.type == TileType.PLAIN) 
+            if (neighbour.type == TileType.PLAIN)
             {
-                if (!tile.planted)
-                {
-                    tile.planted = true;
-                    tile.InstantiatePlant();
-                    propagated = true;
-                    break;
-                }
+                neighbour.planted = true;
+                neighbour.InstantiatePlant();
             }
-        }
+            Pollinated = false;
+            flourished = false;
+            var plant = _plantGameObj.GetComponent<TreePlant>();
+            plant.Pollinated = false;
+            plant.RemoveFlower();
+            ActionHandler?.Invoke(ActionType.NECTAR, true);
+        });
     }
 
     private List<Tile> FindNeighborsTiles()
     {
         var neighbors = new List<Tile>();
         var position = gameObject.transform.position;
-        var x = (int)(position.x);
-        var y = (int)(position.z);
+        var x = (int) (position.x);
+        var y = (int) (position.z);
 
-        for (var i = x - 1; i < x + 2; i++)
-        {
-            for (var j = y - 1; j < y + 2; j++)
-            {
-                if (i == x && j == y) continue;
-                var neighborsTile = _mapData.GetTileAt(i, j);
-               
-                if (neighborsTile != null)
-                {
-                    neighbors.Add(neighborsTile);
-                }
-            }
-        }
+        // Add neighbours in order to the wind direction
+        neighbors.Add(_mapData.GetTileAt(x, y + 1));
+        neighbors.Add(_mapData.GetTileAt(x - 1, y + 1));
+        neighbors.Add(_mapData.GetTileAt(x - 1, y));
+        neighbors.Add(_mapData.GetTileAt(x - 1, y - 1));
+        neighbors.Add(_mapData.GetTileAt(x, y - 1));
+        neighbors.Add(_mapData.GetTileAt(x + 1, y - 1));
+        neighbors.Add(_mapData.GetTileAt(x + 1, y));
+        neighbors.Add(_mapData.GetTileAt(x + 1, y + 1));
 
         return neighbors;
     }
@@ -102,18 +122,18 @@ public class Tile : MonoBehaviour
     public void OnFullyGrown()
     {
         plantGrown = true;
-        GameObject.Find("Map").GetComponent<SimPlant>().OnGrowthChanged(this);
+        ActionHandler?.Invoke(ActionType.NECTAR, true);
     }
 
     public void OnFlourished()
     {
         flourished = true;
-        GameObject.Find("Map").GetComponent<SimPlant>().OnFlourishedChanged(this);
+        ActionHandler?.Invoke(ActionType.BEE, true);
     }
 
     public void OnPollinated()
     {
         Pollinated = true;
-        GameObject.Find("Map").GetComponent<SimPlant>().OnPollinatedChanged(this);
+        ActionHandler?.Invoke(ActionType.SEED, true);
     }
 }

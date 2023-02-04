@@ -19,9 +19,10 @@ public class Compass : MonoBehaviour {
         LeanTween.delayedCall(Random.Range(5f, 10f), callback);
     }
 
-    void callback() {
+    void callback()
+    {
         _currentDirection = Random.Range(0, 8);
-        _rt.Rotate( new Vector3( 0, 0, 45 * _currentDirection ) );
+        _rt.transform.rotation = Quaternion.Euler(0, 0, 45 * _currentDirection);
         LeanTween.delayedCall(Random.Range(5f, 10f), callback);
     }
 }

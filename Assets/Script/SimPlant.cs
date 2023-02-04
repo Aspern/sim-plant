@@ -33,7 +33,8 @@ public class SimPlant : MonoBehaviour
         }
         
         selectedTile = tileGameObj;
-        tileGameObj.GetComponent<Highlight>()?.ToggleHighlight(true);
+        selectedTile.GetComponent<Tile>().ActionHandler = ChangeActionButtonInteractive;
+        selectedTile.GetComponent<Highlight>()?.ToggleHighlight(true);
     }
 
     public void UnselectTile()
@@ -41,6 +42,7 @@ public class SimPlant : MonoBehaviour
         if (!selectedTile) return;
         
         selectedTile.GetComponent<Highlight>()?.ToggleHighlight(false);
+        selectedTile.GetComponent<Tile>().ActionHandler = null;
         selectedTile = null;
     }
 

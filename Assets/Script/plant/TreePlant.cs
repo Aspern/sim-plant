@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TreePlant :  MonoBehaviour
 {
@@ -7,7 +6,7 @@ public class TreePlant :  MonoBehaviour
     public GameObject flowerPrefab;
     public GameObject beePrefab;
     public bool Pollinated { get; set; }
-    
+
     private GameObject _flowerGameObj;
     private GameObject _beeGameObj;
 
@@ -35,6 +34,12 @@ public class TreePlant :  MonoBehaviour
             Quaternion.identity,
             parentTransform
         );
+    }
+    
+    public void RemoveFlower()
+    {
+        if(!_flowerGameObj) return;
+        Destroy(_flowerGameObj);
     }
 
     public void CreateBees()
