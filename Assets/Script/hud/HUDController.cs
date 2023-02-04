@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HUDController : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class HUDController : MonoBehaviour
     {
         Debug.Log("Show menu");
         _menuPanel.SetActive(true);
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 
     public void Resume()
