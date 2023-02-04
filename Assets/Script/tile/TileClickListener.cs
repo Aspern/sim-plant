@@ -35,7 +35,7 @@ public class TileClickListener : MonoBehaviour
             if (tile)
             {
                 _simPlant.SelectTile(gameObj);
-
+                _simPlant.DisableAllActionButtons();
                 if (tile.planted)
                 {
                     if (tile.plantGrown)

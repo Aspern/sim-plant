@@ -43,10 +43,13 @@ public class Tile : MonoBehaviour
         {
             if (tile.type == TileType.PLAIN) 
             {
-                tile.planted = true;
-                tile.InstantiatePlant();
-                propagated = true;
-                break;
+                if (!tile.planted)
+                {
+                    tile.planted = true;
+                    tile.InstantiatePlant();
+                    propagated = true;
+                    break;
+                }
             }
         }
     }
