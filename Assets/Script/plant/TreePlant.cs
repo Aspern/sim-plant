@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 public class TreePlant :  MonoBehaviour
 {
     public float initialGrowTime = 60f;
     public GameObject flowerPrefab;
     public GameObject beePrefab;
-
+    public bool Pollinated { get; set; }
+    
     private GameObject _flowerGameObj;
     private GameObject _beeGameObj;
 
@@ -37,7 +39,7 @@ public class TreePlant :  MonoBehaviour
 
     public void CreateBees()
     {
-        if(_beeGameObj) return;
+        if(_beeGameObj || Pollinated) return;
 
         var parentTransform = transform;
         _beeGameObj = Instantiate(
@@ -46,5 +48,13 @@ public class TreePlant :  MonoBehaviour
             Quaternion.identity,
             parentTransform
         );
+    }
+
+    public void RemoveBees()
+    {
+        if (_beeGameObj && Pollinated)
+        {
+            Destroy(_beeGameObj);
+        }
     }
 }

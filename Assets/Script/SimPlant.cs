@@ -99,4 +99,12 @@ public class SimPlant : MonoBehaviour
             EnableActionButton(ActionType.BEE);
         }
     }
+    
+    public void OnPollinatedChanged(Tile tile)
+    {
+        if (selectedTile.GetComponent<Tile>().Equals(tile))
+        {
+            EnableActionButton(ActionType.SEED);
+        }
+    }
 }

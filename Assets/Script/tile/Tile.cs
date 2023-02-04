@@ -5,8 +5,8 @@ public class Tile : MonoBehaviour
     public GameObject plantPrefab;
     public TileType type;
     public bool planted;
-    public bool PlantGrown;
-    public bool Flourished;
+    public bool plantGrown;
+    public bool flourished;
     public bool Pollinated { get; set; }
 
     private GameObject _plantGameObj;
@@ -19,13 +19,13 @@ public class Tile : MonoBehaviour
 
     public void UseNectar()
     {
-        if (!PlantGrown || !_plantGameObj) return;
+        if (!plantGrown || !_plantGameObj) return;
         _plantGameObj.GetComponent<TreePlant>().CreateFlower();
     }
 
     public void UseBee()
     {
-        if (!Flourished || !_plantGameObj) return;
+        if (!flourished || !_plantGameObj) return;
         _plantGameObj.GetComponent<TreePlant>().CreateBees();
     }
 
@@ -51,13 +51,19 @@ public class Tile : MonoBehaviour
 
     public void OnFullyGrown()
     {
-        PlantGrown = true;
+        plantGrown = true;
         GameObject.Find("Map").GetComponent<SimPlant>().OnGrowthChanged(this);
     }
     
     public void OnFlourished()
     {
-        Flourished = true;
+        flourished = true;
         GameObject.Find("Map").GetComponent<SimPlant>().OnFlourishedChanged(this);
+    }
+
+    public void OnPollinated()
+    {
+        Pollinated = true;
+        GameObject.Find("Map").GetComponent<SimPlant>().OnPollinatedChanged(this);
     }
 }

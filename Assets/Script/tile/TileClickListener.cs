@@ -38,12 +38,12 @@ public class TileClickListener : MonoBehaviour
 
                 if (tile.planted)
                 {
-                    if (tile.PlantGrown)
+                    if (tile.plantGrown)
                     {
                         _simPlant.EnableActionButton(ActionType.NECTAR);
                     }
 
-                    if (tile.Flourished)
+                    if (tile.flourished)
                     {
                         _simPlant.EnableActionButton(ActionType.BEE);
                     }
