@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1815468, g: 0.22718757, b: 0.30740595, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154684, g: 0.22718963, b: 0.30740628, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16261,7 +16261,6 @@ GameObject:
   - component: {fileID: 479773629}
   - component: {fileID: 479773631}
   - component: {fileID: 479773630}
-  - component: {fileID: 479773632}
   - component: {fileID: 479773633}
   - component: {fileID: 479773634}
   m_Layer: 0
@@ -16308,18 +16307,6 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9198ed4f6379d73458c2cb266f5f28d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &479773632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479773628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ec687942bc4389ad3e0a89814410e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &479773633
@@ -35313,7 +35300,6 @@ GameObject:
   - component: {fileID: 1005366519}
   - component: {fileID: 1005366518}
   - component: {fileID: 1005366517}
-  - component: {fileID: 1005366520}
   - component: {fileID: 1005366521}
   m_Layer: 5
   m_Name: ActionButtonBee
@@ -35437,18 +35423,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005366515}
   m_CullTransparentMesh: 1
---- !u!114 &1005366520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1005366515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e3c40a6d9384e5bb16902fe9e766882, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1005366521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61941,7 +61915,6 @@ GameObject:
   - component: {fileID: 1632892683}
   - component: {fileID: 1632892682}
   - component: {fileID: 1632892681}
-  - component: {fileID: 1632892686}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -62069,18 +62042,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!114 &1632892686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632892680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb1a095f43cc684b84860dbfb067929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1633152079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80041,14 +80002,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114718620}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 45, y: 140, z: 0}
+  m_LocalRotation: {x: 0.13088544, y: 0.86816275, z: -0.35960478, w: 0.31598544}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 140, z: 0}
 --- !u!1001 &2115628707
 PrefabInstance:
   m_ObjectHideFlags: 0
