@@ -2294,7 +2294,6 @@ GameObject:
   - component: {fileID: 1819451162}
   - component: {fileID: 1819451161}
   - component: {fileID: 1819451163}
-  - component: {fileID: 1819451164}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -2373,19 +2372,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ab2aa100c5a347f1a584aecf376ff1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: ea5561e6d10c54005a3a5d3e8072514d, type: 2}
---- !u!114 &1819451164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819451158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 392525ae249be4ba49aeb2011ffb113d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: ea5561e6d10c54005a3a5d3e8072514d, type: 2}
