@@ -4,6 +4,10 @@ public class CameraMovement : MonoBehaviour {
     private float moveSpeed = 20f;
     private float moveSpeedMouse = 200f;
     private float scrollSpeed = 5000f;
+    public int maxX;
+    public int maxZ;
+    public int minX;
+    public int minZ;
 
     void Update () {
         
@@ -11,28 +15,28 @@ public class CameraMovement : MonoBehaviour {
         {
             transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) *
                                   (moveSpeed * Time.deltaTime);
-            if (transform.position.x > 25)
+            if (transform.position.x > maxX)
             {
                 var position = transform.position;
-                position.Set(25, position.y, position.z);
+                position.Set(maxX, position.y, position.z);
                 transform.position = position;
             }
-            if (transform.position.z > 25)
+            if (transform.position.z > maxZ)
             {
                 var position = transform.position;
-                position.Set(position.x, position.y, 25);
+                position.Set(position.x, position.y, maxZ);
                 transform.position = position;
             }
-            if (transform.position.x < -10)
+            if (transform.position.x < minX)
             {
                 var position = transform.position;
-                position.Set(-10, position.y, position.z);
+                position.Set(minX, position.y, position.z);
                 transform.position = position;
             }
-            if (transform.position.z < -10)
+            if (transform.position.z < minZ)
             {
                 var position = transform.position;
-                position.Set(position.x, position.y, -10);
+                position.Set(position.x, position.y, minZ);
                 transform.position = position;
             }
         }
