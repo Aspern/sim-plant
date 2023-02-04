@@ -3,17 +3,9 @@
 public class Tile: MonoBehaviour
 {
     public GameObject plantPrefab;
-
     public TileType type;
-
     public bool planted;
-
-    private void InstantiatePlant()
-    {
-        var plantGameObj = Instantiate(plantPrefab);
-        plantGameObj.transform.position = gameObject.transform.position;
-        plantGameObj.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-    }
+    public bool PlantGrown { get; set; }
 
     private void Start()
     {
@@ -21,5 +13,16 @@ public class Tile: MonoBehaviour
         {
             InstantiatePlant();
         }
+    }
+
+    private void InstantiatePlant()
+    {
+        var parentTransform = transform;
+        Instantiate(
+            plantPrefab,
+            parentTransform.position,
+            Quaternion.identity,
+            parentTransform
+        );
     }
 }

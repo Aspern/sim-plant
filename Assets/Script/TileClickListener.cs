@@ -7,6 +7,10 @@ public class TileClickListener : MonoBehaviour
 {
     private Camera _camera;
     private readonly List<Button> _actionButtons = new();
+    private Button _actionButtonNectar;
+    private Button _actionButtonBee;
+    private Button _actionButtonSeed;
+    private Button _actionButtonSun;
     private TileMap _tileMap;
 
     private void Awake()
@@ -14,10 +18,15 @@ public class TileClickListener : MonoBehaviour
         _tileMap = GameObject.Find("Map").GetComponent<TileMap>();
         _camera = Camera.main;
 
-        for (var i = 1; i < 5; i++)
-        {
-            _actionButtons.Add(GameObject.Find("ActionButton" + i).GetComponent<Button>());
-        }
+        _actionButtonNectar = GameObject.Find("ActionButtonNectar").GetComponent<Button>();
+        _actionButtonBee = GameObject.Find("ActionButtonBee").GetComponent<Button>();
+        _actionButtonSeed = GameObject.Find("ActionButtonSeed").GetComponent<Button>();
+        _actionButtonSun = GameObject.Find("ActionButtonSun").GetComponent<Button>();
+        
+        _actionButtons.Add(_actionButtonNectar);
+        _actionButtons.Add(_actionButtonBee);
+        _actionButtons.Add(_actionButtonSeed);
+        _actionButtons.Add(_actionButtonSun);
     }
 
     private void Update()
@@ -44,7 +53,10 @@ public class TileClickListener : MonoBehaviour
 
                 if (tile.planted)
                 {
-                    _actionButtons.ForEach(button => button.interactable = true);
+                    if (tile.PlantGrown)
+                    {
+                        _actionButtonNectar.interactable = true;
+                    }
                 }
                 else
                 {
