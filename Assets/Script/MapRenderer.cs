@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapRenderer : MonoBehaviour
 {
-    private GameObject[] _tiles = new GameObject[5];
+    private GameObject[] _tiles = new GameObject[7];
     private MapData _mapData;
 
     private void Awake() {
@@ -15,6 +15,8 @@ public class MapRenderer : MonoBehaviour
         _tiles[2] = Resources.Load<GameObject>("fbx/corner");
         _tiles[3] = Resources.Load<GameObject>("fbx/inner_corner");
         _tiles[4] = Resources.Load<GameObject>("fbx/plain");
+        _tiles[5] = Resources.Load<GameObject>("fbx/rock");
+        _tiles[6] = Resources.Load<GameObject>("fbx/trees");
     }
 
     void Start() {
