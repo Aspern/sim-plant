@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8216114733854314266}
   - component: {fileID: 5019925084810395839}
   - component: {fileID: 7083788437834347637}
-  - component: {fileID: 5371057578026916593}
+  - component: {fileID: -7097285234259752447}
+  - component: {fileID: -3341367608924299456}
   m_Layer: 0
   m_Name: flower
   m_TagString: Untagged
@@ -84,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5371057578026916593
+--- !u!114 &-7097285234259752447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,7 +94,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8741012425841382816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8acf33015ed14d27bf5c968fd1c14e7b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b956ee9fa6fda648a09124d732b0c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialGrowTime: 3
+--- !u!114 &-3341367608924299456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8741012425841382816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4855771a21a145d28656c735c7b4beea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialGrowTime: 5

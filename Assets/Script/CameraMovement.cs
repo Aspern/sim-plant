@@ -21,32 +21,7 @@ public class CameraMovement : MonoBehaviour {
         
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
-            transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) *
-                                  (moveSpeed * Time.deltaTime);
-            if (transform.position.x > maxX)
-            {
-                var position = transform.position;
-                position.Set(maxX, position.y, position.z);
-                transform.position = position;
-            }
-            if (transform.position.z > maxZ)
-            {
-                var position = transform.position;
-                position.Set(position.x, position.y, maxZ);
-                transform.position = position;
-            }
-            if (transform.position.x < minX)
-            {
-                var position = transform.position;
-                position.Set(minX, position.y, position.z);
-                transform.position = position;
-            }
-            if (transform.position.z < minZ)
-            {
-                var position = transform.position;
-                position.Set(position.x, position.y, minZ);
-                transform.position = position;
-            }
+            MoveVertically(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), moveSpeed);
         }
         
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
@@ -56,8 +31,37 @@ public class CameraMovement : MonoBehaviour {
 
         if (Input.GetMouseButton(1))
         {
-            transform.position += new Vector3(-Input.GetAxis("Mouse X"), 0, -Input.GetAxis("Mouse Y")) *
-                                  (moveSpeedMouse * Time.deltaTime);
+            MoveVertically(-Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"), moveSpeedMouse);
+        }
+    }
+
+    private void MoveVertically(float xMovement, float zMovement, float movementSpeed)
+    {
+        transform.position += new Vector3(xMovement, 0, zMovement) *
+                              (movementSpeed * Time.deltaTime);
+        if (transform.position.x > maxX)
+        {
+            var position = transform.position;
+            position.Set(maxX, position.y, position.z);
+            transform.position = position;
+        }
+        if (transform.position.z > maxZ)
+        {
+            var position = transform.position;
+            position.Set(position.x, position.y, maxZ);
+            transform.position = position;
+        }
+        if (transform.position.x < minX)
+        {
+            var position = transform.position;
+            position.Set(minX, position.y, position.z);
+            transform.position = position;
+        }
+        if (transform.position.z < minZ)
+        {
+            var position = transform.position;
+            position.Set(position.x, position.y, minZ);
+            transform.position = position;
         }
     }
 

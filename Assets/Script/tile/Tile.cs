@@ -5,8 +5,8 @@ public class Tile : MonoBehaviour
     public GameObject plantPrefab;
     public TileType type;
     public bool planted;
-    public bool PlantGrown { get; set; }
-    public bool Flourished { get; set; }
+    public bool PlantGrown;
+    public bool Flourished;
     public bool Pollinated { get; set; }
 
     private GameObject _plantGameObj;
@@ -40,5 +40,17 @@ public class Tile : MonoBehaviour
             Quaternion.identity,
             parentTransform
         );
+    }
+
+    public void OnFullyGrown()
+    {
+        Flourished = true;
+        GameObject.Find("Map").GetComponent<SimPlant>().OnGrowthChanged();
+    }
+    
+    public void OnFlourished()
+    {
+        Flourished = true;
+        GameObject.Find("Map").GetComponent<SimPlant>().OnFlourishedChanged();
     }
 }

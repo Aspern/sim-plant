@@ -18,7 +18,7 @@ public class TreePlant :  MonoBehaviour
     {
         LeanTween.scale(gameObject, new Vector3(1, 1, 1), initialGrowTime).setOnComplete(o =>
         {
-            gameObject.GetComponentInParent<Tile>().PlantGrown = true;
+            gameObject.GetComponentInParent<Tile>().OnFullyGrown();
         });
     }
     

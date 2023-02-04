@@ -84,4 +84,13 @@ public class SimPlant : MonoBehaviour
             }
         });
     }
+
+    public void OnGrowthChanged()
+    {
+        EnableActionButton(ActionType.NECTAR);
+    }
+    public void OnFlourishedChanged()
+    {
+        EnableActionButton(ActionType.BEE);
+    }
 }
