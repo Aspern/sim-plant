@@ -40,8 +40,16 @@ public class TileClickListener : MonoBehaviour
 
             if (tile)
             {
-                _actionButtons.ForEach(button => button.interactable = true);
                 _tileMap.SelectTile(gameObj);
+
+                if (tile.planted)
+                {
+                    _actionButtons.ForEach(button => button.interactable = true);
+                }
+                else
+                {
+                    _actionButtons.ForEach(button => button.interactable = false);
+                }
             }
             else // Disable actions and remove selection if game obj is not a tile
             {

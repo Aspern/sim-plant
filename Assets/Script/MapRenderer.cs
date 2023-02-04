@@ -36,12 +36,12 @@ public class MapRenderer : MonoBehaviour
         tileGameObj.AddComponent<Tile>();
         tileGameObj.AddComponent<Highlight>();
 
-        var type = TileTypes.findById(tileId);
+       // var type = TileTypes.findById(tileId);
         var tile = tileGameObj.GetComponent<Tile>();
         
         _tileMap.AddTile(x, y, tile);
         
-        tileGameObj.GetComponent<Tile>().type = type;
+        //tileGameObj.GetComponent<Tile>().type = type;
 
         switch (mapData % 4) {
             case 1:
