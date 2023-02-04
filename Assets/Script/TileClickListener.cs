@@ -41,13 +41,11 @@ public class TileClickListener : MonoBehaviour
             if (tile)
             {
                 _actionButtons.ForEach(button => button.interactable = true);
-                _tileMap.SelectTile(tile);
-
-                // TODO: pass game object to a renderer to select it
+                _tileMap.SelectTile(gameObj);
             }
             else // Disable actions and remove selection if game obj is not a tile
             {
-                _tileMap.SelectTile(tile);
+                _tileMap.UnselectTile();
                 _actionButtons.ForEach(button => button.interactable = false);
             }
         }

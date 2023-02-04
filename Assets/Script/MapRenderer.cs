@@ -31,9 +31,10 @@ public class MapRenderer : MonoBehaviour
         var mapData = _mapData.getDataAt(x, y);
         var tileId = mapData / 4;
 
-        GameObject tileGameObj = Instantiate(_tiles[tileId]) as GameObject;
+        var tileGameObj = Instantiate(_tiles[tileId]);
         tileGameObj.AddComponent<BoxCollider>();
         tileGameObj.AddComponent<Tile>();
+        tileGameObj.AddComponent<Highlight>();
 
         var type = TileTypes.findById(tileId);
         var tile = tileGameObj.GetComponent<Tile>();
@@ -54,7 +55,7 @@ public class MapRenderer : MonoBehaviour
                 break;
         }
 
-        if(tileGameObj != null) tileGameObj.transform.position = new Vector3(x + 0.5f, y + 0.5f , 0);
+        if(tileGameObj != null) tileGameObj.transform.position = new Vector3(x + 0.5f, 0 , y + 0.5f);
     }
 
     void Update()

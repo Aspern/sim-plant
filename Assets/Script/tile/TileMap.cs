@@ -4,7 +4,7 @@ using UnityEngine;
 public class TileMap : MonoBehaviour
 {
     private Tile[,] _tiles;
-    private Tile _selection;
+    public GameObject selection;
 
     private void Awake()
     {
@@ -17,15 +17,22 @@ public class TileMap : MonoBehaviour
         _tiles[x, y] = tile;
     }
 
-    public void SelectTile(Tile tile)
+    public void SelectTile(GameObject tileGameObj)
     {
-        _selection = tile;
-        Debug.Log($"Selected tile  {tile.type.id}, {tile.type.name}");
+        if (selection) // Remove highlight from past selection
+        {
+            selection.GetComponent<Highlight>()?.ToggleHighlight(false);
+        }
+        
+        selection = tileGameObj;
+        tileGameObj.GetComponent<Highlight>()?.ToggleHighlight(true);
     }
 
     public void UnselectTile()
     {
-        _selection = null;
-        Debug.Log("Unselected tile");
+        if (!selection) return;
+        
+        selection.GetComponent<Highlight>()?.ToggleHighlight(false);
+        selection = null;
     }
 }
