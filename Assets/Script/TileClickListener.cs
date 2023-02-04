@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public partial class TileClickListener : MonoBehaviour
+public class TileClickListener : MonoBehaviour
 {
     private Camera _camera;
     private MapData _mapData; 
