@@ -4,10 +4,12 @@ using UnityEngine.SceneManagement;
 public class HUDController : MonoBehaviour
 {
     private GameObject _menuPanel;
+    private SimPlant _simPlant;
 
     private void Awake()
     {
         _menuPanel = GameObject.Find("MenuPanel");
+        _simPlant = GameObject.Find("Map").GetComponent<SimPlant>();
         _menuPanel.SetActive(false);
     }
 

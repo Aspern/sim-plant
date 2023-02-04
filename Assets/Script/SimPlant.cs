@@ -64,6 +64,11 @@ public class SimPlant : MonoBehaviour
         ChangeActionButtonInteractive(action, false);
     }
 
+    public void UseNectarAction()
+    {
+        selectedTile.GetComponent<Tile>().UseNectar();
+    }
+
     private void ChangeActionButtonInteractive(ActionType action, bool interactive)
     {
         _actionButtons.ForEach(button =>

@@ -7,6 +7,12 @@ public class Tile: MonoBehaviour
     public bool planted;
     public bool PlantGrown { get; set; }
 
+
+    public void UseNectar()
+    {
+        
+    }
+
     private void Start()
     {
         if (planted)
