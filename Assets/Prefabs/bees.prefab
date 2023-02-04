@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1335013888358151941}
   - component: {fileID: 2677732595256785056}
   - component: {fileID: 202029567648664682}
-  - component: {fileID: 5999717375762732223}
+  - component: {fileID: 1199241972435520248}
   m_Layer: 0
   m_Name: bees
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5999717375762732223
+--- !u!114 &1199241972435520248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,6 +93,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1859208889593802175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc5a6c463df2934ca40908d8311333d, type: 3}
+  m_Script: {fileID: 11500000, guid: ef3fa4965e1b40b7bd40ddff8fd57b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialRotateTime: 3

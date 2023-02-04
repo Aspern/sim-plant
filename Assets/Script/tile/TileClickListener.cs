@@ -47,6 +47,11 @@ public class TileClickListener : MonoBehaviour
                     {
                         _simPlant.EnableActionButton(ActionType.BEE);
                     }
+
+                    if (tile.Pollinated)
+                    {
+                        _simPlant.EnableActionButton(ActionType.SEED);
+                    }
                 }
                 else
                 {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154626, g: 0.22718877, b: 0.30740434, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154684, g: 0.22718963, b: 0.30740628, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -35375,7 +35375,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 479773634}
         m_TargetAssemblyTypeName: SimPlant, Assembly-CSharp
-        m_MethodName: UseNectarAction
+        m_MethodName: UseBeeAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

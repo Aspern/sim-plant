@@ -6,7 +6,7 @@ public class Flower : MonoBehaviour
 
     private void Awake()
     {
-        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        transform.localScale = new Vector3(0.5f, 1, 0.5f);
     }
 
     private void Start()

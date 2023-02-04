@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae157566ae443cfa8a2265b77650678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialGrowTime: 10
+  initialGrowTime: 3
   flowerPrefab: {fileID: 8741012425841382816, guid: 03e8fee520fe35d4dbebe93fb4a1888c,
+    type: 3}
+  beePrefab: {fileID: 1859208889593802175, guid: ae951fd4e3dd9f446be1d36bacb72e04,
     type: 3}

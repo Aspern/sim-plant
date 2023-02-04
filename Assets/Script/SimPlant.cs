@@ -68,6 +68,11 @@ public class SimPlant : MonoBehaviour
     {
         selectedTile.GetComponent<Tile>().UseNectar();
     }
+    
+    public void UseBeeAction()
+    {
+        selectedTile.GetComponent<Tile>().UseBee();
+    }
 
     private void ChangeActionButtonInteractive(ActionType action, bool interactive)
     {
