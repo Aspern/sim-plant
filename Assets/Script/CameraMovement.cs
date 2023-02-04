@@ -1,13 +1,21 @@
 using UnityEngine;
 public class CameraMovement : MonoBehaviour {
     
-    private float moveSpeed = 20f;
-    private float moveSpeedMouse = 200f;
-    private float scrollSpeed = 5000f;
-    public int maxX;
-    public int maxZ;
-    public int minX;
-    public int minZ;
+    public float moveSpeed = 20f;
+    public float moveSpeedMouse = 200f;
+    public float scrollSpeed = 10f;
+    public int maxX = 33;
+    public int maxZ = 25;
+    public int minX = 0;
+    public int minZ = -5;
+    public float minFov = 15f;
+    public float maxFov = 90f;
+    private Camera _camera;
+
+    private void Start()
+    {
+        _camera = Camera.main;
+    }
 
     void Update () {
         
@@ -43,7 +51,7 @@ public class CameraMovement : MonoBehaviour {
         
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            scrollCamera();
+            ScrollCamera();
         }
 
         if (Input.GetMouseButton(1))
@@ -53,11 +61,11 @@ public class CameraMovement : MonoBehaviour {
         }
     }
 
-    private void scrollCamera()
+    private void ScrollCamera()
     {
-        float currentX = transform.forward.x;
-        float currentZ = transform.forward.z;
-        
-        transform.position += new Vector3(-Input.GetAxis("Mouse ScrollWheel") * (currentX / (currentX + currentZ)), -Input.GetAxis("Mouse ScrollWheel"), -Input.GetAxis("Mouse ScrollWheel") * (currentZ / (currentX + currentZ))) * (scrollSpeed * Time.deltaTime);
+        float fov = _camera.fieldOfView;
+        fov += -Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+        fov = Mathf.Clamp(fov, minFov, maxFov);
+        _camera.fieldOfView = fov;
     }
 }
