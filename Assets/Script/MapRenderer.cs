@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MapRenderer : MonoBehaviour
@@ -31,6 +29,7 @@ public class MapRenderer : MonoBehaviour
         var mapData = _mapData.getDataAt(x, y);
 
         GameObject tile = Instantiate(_tiles[mapData / 4]) as GameObject;
+        tile.AddComponent<BoxCollider>();
 
         switch (mapData % 4) {
             case 1:

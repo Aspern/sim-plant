@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 
 public static class TileTypes
 {
@@ -19,7 +20,7 @@ public static class TileTypes
             2 => Corner,
             3 => InnerCorner,
             4 => Plain,
-            _ => throw new IndexOutOfRangeException("There is no tile for  id " + id)
+            _ => throw new Exception("Cannot find tile for id " + id)
         };
     }
 }

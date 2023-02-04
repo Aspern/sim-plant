@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class TileMap : MonoBehaviour
 {
@@ -15,12 +16,18 @@ public class TileMap : MonoBehaviour
             for (var j = 0; j < mapData.data.GetLength(1); j++)
             {
                 var tileId = mapData.data[i, j] / directions;
-                var tile = new Tile
+                try
                 {
-                    type = TileTypes.findById(tileId)
-                };
-                
-                _tiles[i, j] = tile;
+                    var tile = new Tile
+                    {
+                        type = TileTypes.findById(tileId)
+                    };
+                    _tiles[i, j] = tile;
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e);
+                }
             }
         }
     }

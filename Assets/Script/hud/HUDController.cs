@@ -12,6 +12,7 @@ public class HUDController : MonoBehaviour
 
     public void ShowMenu()
     {
+        Debug.Log("Show menu");
         _menuPanel.SetActive(true);
     }
 
