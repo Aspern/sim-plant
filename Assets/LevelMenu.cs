@@ -10,16 +10,19 @@ public class LevelMenu : MonoBehaviour
 
     public void startLevel1(){
         SceneManager.LoadScene("Level1");
+        PlayerPrefs.SetInt("currentLevel", 1);
+
     }
 
     public void startLevel2(){
         SceneManager.LoadScene("Level2");
+        PlayerPrefs.SetInt("currentLevel", 2);
+
     }
 
         void Start()
     {
-        int finishedLevel = PlayerPrefs.GetInt("finishedLevel");
-        if(finishedLevel >=2){
+        if(PlayerPrefs.GetInt("finishedLevel") >=2){
             Level2.GetComponent<Button>().interactable = true;
         }
     }

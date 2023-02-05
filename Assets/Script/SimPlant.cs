@@ -57,6 +57,8 @@ public class SimPlant : MonoBehaviour
         } else if (plantedTiles == _maxEdgeTiles)
         {
             SceneManager.LoadScene("WinScene");
+            PlayerPrefs.SetInt("finishedLevel", PlayerPrefs.GetInt("currentLevel"));
+
         }
     }
 
