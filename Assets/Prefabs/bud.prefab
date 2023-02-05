@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6734041370943170085}
   - component: {fileID: 7699965036505409920}
   - component: {fileID: 5566222839310572874}
-  - component: {fileID: -598740149314316878}
+  - component: {fileID: 238852959533634994}
   m_Layer: 0
   m_Name: bud
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-598740149314316878
+--- !u!114 &238852959533634994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,7 +93,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6214912915316309151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5858151aec246eba759f7c6529814a9, type: 3}
+  m_Script: {fileID: 11500000, guid: d53be36e5e70424f8d5691ec2f19d633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialGrowTime: 3

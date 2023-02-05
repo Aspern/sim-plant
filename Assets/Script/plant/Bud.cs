@@ -1,19 +1,9 @@
 ﻿using UnityEngine;
 
-public class Bud : MonoBehaviour
+namespace Script.plant
 {
-    public float initialGrowTime = 20f;
-
-    private void Awake()
+    public class Bud : MonoBehaviour
     {
-        transform.localScale = new Vector3(0.5f, 1, 0.5f);
-    }
-
-    private void Start()
-    {
-        LeanTween.scale(gameObject, new Vector3(1, 1, 1), initialGrowTime).setOnComplete(o =>
-        {
-            gameObject.GetComponentInParent<Tile>().OnPollinated();
-        });
+        
     }
 }

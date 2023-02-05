@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6440672861786305432}
   - component: {fileID: 9116739879099008850}
   - component: {fileID: 2629322295569062928}
-  - component: {fileID: -5996617737955821230}
   - component: {fileID: -5612221040689732066}
   m_Layer: 0
   m_Name: water
@@ -99,18 +98,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 0.100000046, z: 1.0000002}
   m_Center: {x: 0, y: 0.049999993, z: 0}
---- !u!114 &-5996617737955821230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7315489488060950151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d63768f2724ab5ba3e9a65816fe83a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-5612221040689732066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,12 +110,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939e8d98c1374a1c96826b9b1bb8f00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantPrefab: {fileID: 408812747697325660, guid: d701b1780e09dfa47977d6128e7ec4f4,
-    type: 3}
-  beePrefab: {fileID: 1859208889593802175, guid: ae951fd4e3dd9f446be1d36bacb72e04,
-    type: 3}
-  seedPrefab: {fileID: 0}
-  type: 0
-  planted: 0
-  beeed: 0
-  plantGrown: 0

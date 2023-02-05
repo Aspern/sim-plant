@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 8779510711815440784}
   - component: {fileID: 6788016660011810138}
   - component: {fileID: 3371512244248192156}
-  - component: {fileID: -2448132187408383604}
-  - component: {fileID: 1130295566776420234}
+  - component: {fileID: 4230731578148672071}
   m_Layer: 0
   m_Name: edge
   m_TagString: Untagged
@@ -99,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.99999994, y: 0.5, z: 1}
   m_Center: {x: 0, y: 0.24999997, z: 0}
---- !u!114 &-2448132187408383604
+--- !u!114 &4230731578148672071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,24 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939e8d98c1374a1c96826b9b1bb8f00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantPrefab: {fileID: 408812747697325660, guid: d701b1780e09dfa47977d6128e7ec4f4,
-    type: 3}
-  beePrefab: {fileID: 1859208889593802175, guid: ae951fd4e3dd9f446be1d36bacb72e04,
-    type: 3}
-  seedPrefab: {fileID: 0}
-  type: 2
-  planted: 0
-  beeed: 0
-  plantGrown: 0
---- !u!114 &1130295566776420234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4986361373744192655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d63768f2724ab5ba3e9a65816fe83a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  type: 1

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1335013888358151941}
   - component: {fileID: 2677732595256785056}
   - component: {fileID: 202029567648664682}
-  - component: {fileID: 1199241972435520248}
   - component: {fileID: 5067774286022737722}
+  - component: {fileID: 8162818925147411424}
   m_Layer: 0
   m_Name: bees
   m_TagString: Untagged
@@ -85,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1199241972435520248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859208889593802175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef3fa4965e1b40b7bd40ddff8fd57b74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialRotateTime: 3
-  initialPollinatingTime: 3
 --- !u!82 &5067774286022737722
 AudioSource:
   m_ObjectHideFlags: 0
@@ -195,3 +181,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8162818925147411424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859208889593802175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f19f1dc177241a7aa7be4fbc37a5bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5617559681237341070}
   - component: {fileID: 7642999502863181636}
   - component: {fileID: 2937833975240818441}
-  - component: {fileID: 5823010276362142123}
   - component: {fileID: 6013442460039076746}
   m_Layer: 0
   m_Name: trees
@@ -99,18 +98,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.003235, y: 1.08676, z: 1.0000002}
   m_Center: {x: 0.0016174171, y: 0.54338, z: 0.00000002980233}
---- !u!114 &5823010276362142123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8147469112080729745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d63768f2724ab5ba3e9a65816fe83a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6013442460039076746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,9 +110,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939e8d98c1374a1c96826b9b1bb8f00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantPrefab: {fileID: 408812747697325660, guid: d701b1780e09dfa47977d6128e7ec4f4,
-    type: 3}
-  type: 6
-  planted: 0
-  plantGrown: 0
-  flourished: 0
