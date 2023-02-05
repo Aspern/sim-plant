@@ -234,7 +234,6 @@ public class Tile : MonoBehaviour
     public void OnFlourished()
     {
         Flourished = true;
-        ActionHandler?.Invoke(ActionType.BEE, true);
     }
 
     public void OnPollinated()
