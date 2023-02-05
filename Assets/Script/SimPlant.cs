@@ -15,7 +15,7 @@ public class SimPlant : MonoBehaviour
     private Button _actionButtonSeed;
     private Button _actionButtonScythe;
     private MapData _mapData;
-    private int _maxEdgeTiles = 0;
+    private int _maxEdgeTiles;
 
     private GameObject _selection;
 
@@ -138,28 +138,5 @@ public class SimPlant : MonoBehaviour
                 button.interactable = interactive;
             }
         });
-    }
-
-    public void OnGrowthChanged(Tile tile)
-    {
-        if (selectedTile && selectedTile.GetComponent<Tile>().Equals(tile))
-        {
-            EnableActionButton(ActionType.NECTAR);
-        }
-    }
-    public void OnFlourishedChanged(Tile tile)
-    {
-        if (selectedTile && selectedTile.GetComponent<Tile>().Equals(tile))
-        {
-            EnableActionButton(ActionType.BEE);
-        }
-    }
-    
-    public void OnPollinatedChanged(Tile tile)
-    {
-        if (selectedTile && selectedTile.GetComponent<Tile>().Equals(tile))
-        {
-            EnableActionButton(ActionType.SEED);
-        }
     }
 }
