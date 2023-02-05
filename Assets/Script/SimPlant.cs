@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SimPlant : MonoBehaviour
@@ -37,9 +38,17 @@ public class SimPlant : MonoBehaviour
             _maxEdgeTiles = _mapData.Tiles.FindAll(e => e.tile.type == TileType.PLAIN).Count;
         }
        
-        var plantedTiles = _mapData.Tiles.FindAll(e => e.tile.planted);
+        var plantedTiles = _mapData.Tiles.FindAll(e => e.tile.planted).Count;
         
-        _plantCounter.SetCounter(plantedTiles.Count, _maxEdgeTiles);
+        _plantCounter.SetCounter(plantedTiles, _maxEdgeTiles);
+
+        if (plantedTiles == 0)
+        {
+            SceneManager.LoadScene("GameOverScene");
+        } else if (plantedTiles == _maxEdgeTiles)
+        {
+            SceneManager.LoadScene("WinScene");
+        }
     }
 
 
