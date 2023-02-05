@@ -102,7 +102,7 @@ MonoBehaviour:
     type: 3}
   beePrefab: {fileID: 1859208889593802175, guid: ae951fd4e3dd9f446be1d36bacb72e04,
     type: 3}
-  seedPrefab: {fileID: 1975719340116662402, guid: e68aade4032c4520a7d2e494a166391e,
+  seedPrefab: {fileID: 7863879139667512467, guid: c7da8c037fed58649a7c83e77c389702,
     type: 3}
   type: 4
   planted: 0
