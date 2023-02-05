@@ -99,7 +99,6 @@ public class Tile : MonoBehaviour
     public void DryPlant()
     {
         Pollinated = false;
-        PlantDead = true;
         Flourished = false;
         FlowerStarted = false;
         BudStarted = false;
