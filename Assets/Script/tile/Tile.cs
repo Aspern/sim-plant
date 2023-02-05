@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.VisualScripting;
 using UnityEngine;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 public class Tile : MonoBehaviour
 {
@@ -53,24 +50,36 @@ public class Tile : MonoBehaviour
         if (!BeeGameObj) return moveDirection;
         //_plantGameObj.GetComponent<TreePlant>().CreateBees();
         var neighborsTiles = FindNeighborsTiles();
-        Debug.Log(neighborsTiles.Count);
-        while(true)
-        {
-            Random rnd = new Random();
-            int random = rnd.Next(0, neighborsTiles.Count);
-            if (neighborsTiles[random].type == TileType.PLAIN) 
-            {
-                Debug.Log("Inside if");
-                var position = gameObject.transform.position;
-                var x = (int) (position.x);
-                var z = (int) (position.z);
-                var positionNeighbor = neighborsTiles[random].transform.position;
-                moveDirection = new Vector3((int)positionNeighbor.x - x, 0,
-                    (int)positionNeighbor.z - z);
-                bee.OnNewTile(neighborsTiles[random]);
+
+        Tile destTile = null;
+        foreach (var tile in neighborsTiles) {
+            if (tile.Flourished) {
+                destTile = tile;
                 break;
             }
+
+            if (tile.planted) {
+                destTile = tile;
+            }
         }
+
+        while (destTile == null) {
+            int random = Random.Range(0, neighborsTiles.Count);
+            if (neighborsTiles[random].type == TileType.PLAIN) {
+                destTile = neighborsTiles[random];
+            } 
+        }
+        
+        Debug.Log(neighborsTiles.Count);
+
+        Debug.Log("Inside if");
+        var position = gameObject.transform.position;
+        var x = (int) (position.x);
+        var z = (int) (position.z);
+        var positionNeighbor = destTile.transform.position;
+        moveDirection = new Vector3((int)positionNeighbor.x - x, 0,
+            (int)positionNeighbor.z - z);
+        bee.OnNewTile(destTile);
         return moveDirection;
     }
 
