@@ -61,6 +61,8 @@ public class TreePlant : MonoBehaviour
     {
         if (!_budGameObj) return;
         Destroy(_budGameObj);
+        
+        gameObject.GetComponentInParent<Tile>().BeforeDryPlant();
 
         _dieAction = LeanTween.color(gameObject, new Color(0.63f, 0.32f, 0.18f), initialDieTime).setOnComplete(() =>
         {

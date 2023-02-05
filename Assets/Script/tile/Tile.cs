@@ -96,12 +96,17 @@ public class Tile : MonoBehaviour
         return BeeGameObj;
     }
 
-    public void DryPlant()
+    public void BeforeDryPlant()
     {
         Pollinated = false;
         Flourished = false;
         FlowerStarted = false;
         BudStarted = false;
+    }
+
+    public void DryPlant()
+    {
+        PlantDead = true;
         ActionHandler?.Invoke(ActionType.BEE, false);
         ActionHandler?.Invoke(ActionType.SEED, false);
         ActionHandler?.Invoke(ActionType.NECTAR, false);
