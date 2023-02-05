@@ -47,7 +47,7 @@ public class SimPlant : MonoBehaviour
             _maxEdgeTiles = _mapData.Tiles.FindAll(e => e.tile.type == TileType.PLAIN).Count;
         }
        
-        var plantedTiles = _mapData.Tiles.FindAll(e => e.tile.planted).Count;
+        var plantedTiles = _mapData.Tiles.FindAll(e => e.tile.planted && !e.tile.PlantDead).Count;
         
         _plantCounter.SetCounter(plantedTiles, _maxEdgeTiles);
 
