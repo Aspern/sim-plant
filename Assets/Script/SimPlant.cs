@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,6 +17,8 @@ public class SimPlant : MonoBehaviour
     private MapData _mapData;
     private int _maxEdgeTiles = 0;
 
+    private GameObject _selection;
+
     private void Awake()
     {
         _mapData = GameObject.Find("Map").GetComponent<MapData>();
@@ -29,6 +32,9 @@ public class SimPlant : MonoBehaviour
         _actionButtons.Add(_actionButtonBee);
         _actionButtons.Add(_actionButtonSeed);
         _actionButtons.Add(_actionButtonScythe);
+
+        _selection = GameObject.Find("selection").GameObject();
+        _selection.SetActive(false);
     }
 
     private void Update()
@@ -54,21 +60,26 @@ public class SimPlant : MonoBehaviour
 
     public void SelectTile(GameObject tileGameObj)
     {
-        if (selectedTile) // Remove highlight from past selection
-        {
-            selectedTile.GetComponent<Highlight>()?.ToggleHighlight(false);
-        }
+        // if (selectedTile) // Remove highlight from past selection
+        // {
+        //     selectedTile.GetComponent<Highlight>()?.ToggleHighlight(false);
+        // }
         
         selectedTile = tileGameObj;
         selectedTile.GetComponent<Tile>().ActionHandler = ChangeActionButtonInteractive;
-        selectedTile.GetComponent<Highlight>()?.ToggleHighlight(true);
+        // selectedTile.GetComponent<Highlight>()?.ToggleHighlight(true);
+        
+        _selection.SetActive(true);
+        _selection.transform.position = tileGameObj.transform.position;
     }
 
     public void UnselectTile()
     {
         if (!selectedTile) return;
         
-        selectedTile.GetComponent<Highlight>()?.ToggleHighlight(false);
+        // selectedTile.GetComponent<Highlight>()?.ToggleHighlight(false);
+        _selection.SetActive(true);
+
         selectedTile.GetComponent<Tile>().ActionHandler = null;
         selectedTile = null;
     }
