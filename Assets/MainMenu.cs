@@ -8,9 +8,6 @@ public class MainMenu : MonoBehaviour
 {
     public AudioMixer mixer;
     public void PlayGame(){
-        
-        PlayerPrefs.GetInt("currentLevel");
-
         SceneManager.LoadScene(PlayerPrefs.GetInt("currentLevel"));
         Debug.Log("current level: " + PlayerPrefs.GetInt("currentLevel"));
     }

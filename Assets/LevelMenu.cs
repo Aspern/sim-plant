@@ -20,9 +20,8 @@ public class LevelMenu : MonoBehaviour
 
     }
 
-        void Start()
-    {
-        if(PlayerPrefs.GetInt("finishedLevel") >=2){
+    void Start(){
+        if(PlayerPrefs.GetInt("finishedLevel") >=1){            
             Level2.GetComponent<Button>().interactable = true;
         }
     }
