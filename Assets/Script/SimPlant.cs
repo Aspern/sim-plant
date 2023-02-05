@@ -16,12 +16,12 @@ public class SimPlant : MonoBehaviour
         _actionButtonNectar = GameObject.Find("ActionButtonNectar").GetComponent<Button>();
         _actionButtonBee = GameObject.Find("ActionButtonBee").GetComponent<Button>();
         _actionButtonSeed = GameObject.Find("ActionButtonSeed").GetComponent<Button>();
-        _actionButtonScythe = GameObject.Find("ActionButtonScythe").GetComponent<Button>();
+        //_actionButtonScythe = GameObject.Find("ActionButtonScythe").GetComponent<Button>();
         
         _actionButtons.Add(_actionButtonNectar);
         _actionButtons.Add(_actionButtonBee);
         _actionButtons.Add(_actionButtonSeed);
-        _actionButtons.Add(_actionButtonScythe);
+        //_actionButtons.Add(_actionButtonScythe);
     }
 
 
@@ -73,7 +73,7 @@ public class SimPlant : MonoBehaviour
     
     public void UseBeeAction()
     {
-        selectedTile.GetComponent<Tile>().UseBee();
+        //selectedTile.GetComponent<Tile>().UseBee();
     }
     
     public void UseSeedAction()

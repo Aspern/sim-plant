@@ -100,12 +100,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantPrefab: {fileID: 408812747697325660, guid: d701b1780e09dfa47977d6128e7ec4f4,
     type: 3}
+  beePrefab: {fileID: 1859208889593802175, guid: ae951fd4e3dd9f446be1d36bacb72e04,
+    type: 3}
   seedPrefab: {fileID: 1975719340116662402, guid: e68aade4032c4520a7d2e494a166391e,
     type: 3}
   type: 4
   planted: 0
+  beeed: 0
   plantGrown: 0
-  flourished: 0
 --- !u!65 &8915246231888907501
 BoxCollider:
   m_ObjectHideFlags: 0
