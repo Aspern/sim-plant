@@ -18,7 +18,7 @@ public class TreePlant : MonoBehaviour
 
     private void Start()
     {
-        LeanTween.scale(gameObject, new Vector3(1, 1, 1), initialGrowTime).setOnComplete(o =>
+        LeanTween.scale(gameObject, new Vector3(1, 1, 1), initialGrowTime).setOnComplete(() =>
         {
             gameObject.GetComponentInParent<Tile>().OnFullyGrown();
         });
@@ -57,22 +57,14 @@ public class TreePlant : MonoBehaviour
 
     }
 
-    public void RemoveFlower()
+    public void RemoveBud()
     {
-        if (!_flowerGameObj) return;
-        Destroy(_flowerGameObj);
+        if (!_budGameObj) return;
+        Destroy(_budGameObj);
 
         _dieAction = LeanTween.color(gameObject, new Color(0.63f, 0.32f, 0.18f), initialDieTime).setOnComplete(() =>
         {
             gameObject.GetComponentInParent<Tile>().DryPlant();
         });
-    }
-
-    public void UseBees()
-    {
-        if (gameObject.GetComponentInParent<Tile>().BeeGameObj)
-        {
-            
-        }
     }
 }

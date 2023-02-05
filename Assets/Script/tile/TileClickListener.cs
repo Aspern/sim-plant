@@ -41,7 +41,7 @@ public class TileClickListener : MonoBehaviour
                         _simPlant.EnableActionButton(ActionType.NECTAR);
                     }
 
-                    if (tile.Flourished && tile.HasBee())
+                    if (tile.Flourished && tile.HasBee() && !tile.BudStarted)
                     {
                         _simPlant.EnableActionButton(ActionType.BEE);
                     }

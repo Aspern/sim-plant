@@ -15,6 +15,7 @@ public class Tile : MonoBehaviour
     public bool Flourished  { get; set; }
     public bool Pollinated { get; set; }
     public bool PlantDead { get; set; }
+    public bool BudStarted { get; set; }
 
     public Action<ActionType, bool> ActionHandler { get; set; }
 
@@ -40,6 +41,8 @@ public class Tile : MonoBehaviour
     public void UseBee()
     {
         if (!BeeGameObj || !Flourished) return;
+        BudStarted = true;
+        ActionHandler?.Invoke(ActionType.BEE, false);
         _plantGameObj.GetComponent<TreePlant>().CreateBud();
         BeeGameObj.GetComponent<Bee>().flowerAttracted = true;
     }
@@ -84,7 +87,10 @@ public class Tile : MonoBehaviour
         ActionHandler?.Invoke(ActionType.BEE, false);
         bee.OnNewTile(destTile);
         destTile.BeeGameObj = beeGameObj;
-        destTile.ActionHandler?.Invoke(ActionType.BEE, true);
+        if (destTile.Flourished && !destTile.BudStarted)
+        {
+            destTile.ActionHandler?.Invoke(ActionType.BEE, true);
+        }
         return moveDirection;
     }
 
@@ -98,6 +104,7 @@ public class Tile : MonoBehaviour
         Pollinated = false;
         PlantDead = true;
         Flourished = false;
+        BudStarted = false;
         ActionHandler?.Invoke(ActionType.BEE, false);
         ActionHandler?.Invoke(ActionType.SEED, false);
         ActionHandler?.Invoke(ActionType.NECTAR, false);
@@ -110,6 +117,7 @@ public class Tile : MonoBehaviour
         Flourished = false;
         Pollinated = false;
         plantGrown = false;
+        BudStarted = false;
         planted = false;
         ActionHandler?.Invoke(ActionType.SCYTHE, false);
         Destroy(_plantGameObj);
@@ -147,15 +155,14 @@ public class Tile : MonoBehaviour
         LeanTween.move(seedGameObj, new Vector3(neighbourPos.x, neighbourPos.y - 0.5f, neighbourPos.z), 3).setOnComplete(() =>
         {
             if (neighbour.type == TileType.PLAIN)
-                //TODO resolve
-            //if (tile.type == TileType.PLAIN && !tile.planted) 
+
             {
                 neighbour.planted = true;
                 neighbour.InstantiatePlant();
             }
         
             var plant = _plantGameObj.GetComponent<TreePlant>();
-            plant.RemoveFlower();
+            plant.RemoveBud();
             ActionHandler?.Invoke(ActionType.NECTAR, true);
             Destroy(seedGameObj);
         });
