@@ -37,8 +37,11 @@ public class TreePlant :  MonoBehaviour
             Quaternion.identity,
             parentTransform
         );
+        
+        if (_dieAction == null) return;
         LeanTween.cancel(gameObject, _dieAction.uniqueId);
         LeanTween.color(gameObject, Color.white, 0);
+
     }
     
     public void RemoveFlower()
