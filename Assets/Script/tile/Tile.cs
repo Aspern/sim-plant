@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = System.Random;
 
 public class Tile : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class Tile : MonoBehaviour
 
     private GameObject _plantGameObj;
 
-    private GameObject _beeGameObj { get; set; }
+    public GameObject BeeGameObj { get; set; }
 
     private MapData _mapData;
     private Compass _compass;
@@ -38,26 +39,35 @@ public class Tile : MonoBehaviour
         _plantGameObj.GetComponent<TreePlant>().CreateFlower();
     }
 
-    public Vector3 UseBee(Bee bee, GameObject beeGameObj)
+    public void UseBee()
     {
-        _beeGameObj = beeGameObj;
+        if (!BeeGameObj || !Flourished) return;
+        Pollinated = true;
+        BeeGameObj.GetComponent<Bee>().flowerAttracted = true;
+    }
+    
+    public Vector3 CreateBee(Bee bee, GameObject beeGameObj)
+    {
+        BeeGameObj = beeGameObj;
         Vector3 moveDirection = Vector3.zero;
-        if (!_beeGameObj) return moveDirection;
+        if (!BeeGameObj) return moveDirection;
         //_plantGameObj.GetComponent<TreePlant>().CreateBees();
         var neighborsTiles = FindNeighborsTiles();
         Debug.Log(neighborsTiles.Count);
-        foreach (Tile neighbor in neighborsTiles)
+        while(true)
         {
-            if (neighbor.type == TileType.PLAIN) 
+            Random rnd = new Random();
+            int random = rnd.Next(0, neighborsTiles.Count);
+            if (neighborsTiles[random].type == TileType.PLAIN) 
             {
                 Debug.Log("Inside if");
                 var position = gameObject.transform.position;
                 var x = (int) (position.x);
                 var z = (int) (position.z);
-                var positionNeighbor = neighbor.transform.position;
+                var positionNeighbor = neighborsTiles[random].transform.position;
                 moveDirection = new Vector3((int)positionNeighbor.x - x, 0,
                     (int)positionNeighbor.z - z);
-                bee.OnNewTile(neighbor);
+                bee.OnNewTile(neighborsTiles[random]);
                 break;
             }
         }
@@ -182,7 +192,7 @@ public class Tile : MonoBehaviour
     private void InstantiateBee()
      {
          var parentTransform = transform;
-         _beeGameObj = Instantiate(
+         BeeGameObj = Instantiate(
              beePrefab,
              parentTransform.position,
              Quaternion.identity,

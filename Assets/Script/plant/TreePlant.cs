@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TreePlant :  MonoBehaviour
+public class TreePlant : MonoBehaviour
 {
     public float initialGrowTime = 60f;
     public float initialDieTime = 60f;
@@ -10,7 +10,6 @@ public class TreePlant :  MonoBehaviour
 
 
     private GameObject _flowerGameObj;
-    private GameObject _beeGameObj;
     private LTDescr _dieAction;
 
     private void Awake()
@@ -25,10 +24,10 @@ public class TreePlant :  MonoBehaviour
             gameObject.GetComponentInParent<Tile>().OnFullyGrown();
         });
     }
-    
+
     public void CreateFlower()
     {
-        if(_flowerGameObj) return;
+        if (_flowerGameObj) return;
 
         var parentTransform = transform;
         _flowerGameObj = Instantiate(
@@ -37,42 +36,29 @@ public class TreePlant :  MonoBehaviour
             Quaternion.identity,
             parentTransform
         );
-        
+
         if (_dieAction == null) return;
         LeanTween.cancel(gameObject, _dieAction.uniqueId);
         LeanTween.color(gameObject, Color.white, 0);
 
     }
-    
+
     public void RemoveFlower()
     {
-        if(!_flowerGameObj) return;
+        if (!_flowerGameObj) return;
         Destroy(_flowerGameObj);
 
-        _dieAction = LeanTween.color(gameObject, new Color(0.63f,0.32f,0.18f), initialDieTime).setOnComplete(() =>
+        _dieAction = LeanTween.color(gameObject, new Color(0.63f, 0.32f, 0.18f), initialDieTime).setOnComplete(() =>
         {
             gameObject.GetComponentInParent<Tile>().DryPlant();
         });
     }
 
-    public void CreateBees()
+    public void UseBees()
     {
-        if(_beeGameObj || Pollinated) return;
-
-        var parentTransform = transform;
-        _beeGameObj = Instantiate(
-            beePrefab,
-            parentTransform.position,
-            Quaternion.identity,
-            parentTransform
-        );
-    }
-
-    public void RemoveBees()
-    {
-        if (_beeGameObj && Pollinated)
+        if (gameObject.GetComponentInParent<Tile>().BeeGameObj)
         {
-            Destroy(_beeGameObj);
+            
         }
     }
 }

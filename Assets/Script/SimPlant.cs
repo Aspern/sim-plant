@@ -114,7 +114,7 @@ public class SimPlant : MonoBehaviour
     
     public void UseBeeAction()
     {
-        //selectedTile.GetComponent<Tile>().UseBee();
+        selectedTile.GetComponent<Tile>().UseBee();
     }
     
     public void UseSeedAction()
