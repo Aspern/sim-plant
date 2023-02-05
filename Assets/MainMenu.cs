@@ -9,9 +9,7 @@ public class MainMenu : MonoBehaviour
     public AudioMixer mixer;
     public void PlayGame(){
         
-        if(PlayerPrefs.GetInt("currentLevel") == 0){
-            PlayerPrefs.SetInt("currentLevel", 1);
-        }
+        PlayerPrefs.GetInt("currentLevel");
 
         SceneManager.LoadScene(PlayerPrefs.GetInt("currentLevel"));
         Debug.Log("current level: " + PlayerPrefs.GetInt("currentLevel"));
@@ -25,6 +23,9 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         mixer.SetFloat("MusicVol", Mathf.Log10(PlayerPrefs.GetFloat("MusicVol", 0.75f)) * 20);
-        PlayerPrefs.SetInt("finishedLevel", 1);
+        
+        if(PlayerPrefs.GetInt("currentLevel") == 0){
+            PlayerPrefs.SetInt("currentLevel", 1);
+        }
     }
 } 
