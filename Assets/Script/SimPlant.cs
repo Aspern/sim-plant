@@ -9,19 +9,19 @@ public class SimPlant : MonoBehaviour
     private Button _actionButtonNectar;
     private Button _actionButtonBee;
     private Button _actionButtonSeed;
-    private Button _actionButtonSun;
+    private Button _actionButtonScythe;
 
     private void Awake()
     {
         _actionButtonNectar = GameObject.Find("ActionButtonNectar").GetComponent<Button>();
         _actionButtonBee = GameObject.Find("ActionButtonBee").GetComponent<Button>();
         _actionButtonSeed = GameObject.Find("ActionButtonSeed").GetComponent<Button>();
-        _actionButtonSun = GameObject.Find("ActionButtonSun").GetComponent<Button>();
+        _actionButtonScythe = GameObject.Find("ActionButtonScythe").GetComponent<Button>();
         
         _actionButtons.Add(_actionButtonNectar);
         _actionButtons.Add(_actionButtonBee);
         _actionButtons.Add(_actionButtonSeed);
-        _actionButtons.Add(_actionButtonSun);
+        _actionButtons.Add(_actionButtonScythe);
     }
 
 
@@ -79,6 +79,11 @@ public class SimPlant : MonoBehaviour
     public void UseSeedAction()
     {
         selectedTile.GetComponent<Tile>().UseSeed();
+    }
+    
+    public void UseScytheAction()
+    {
+        selectedTile.GetComponent<Tile>().KillPlant();
     }
 
     private void ChangeActionButtonInteractive(ActionType action, bool interactive)

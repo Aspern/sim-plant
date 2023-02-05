@@ -10,8 +10,9 @@ public class Tile : MonoBehaviour
     public TileType type;
     public bool planted;
     public bool plantGrown;
-    public bool flourished;
+    public bool Flourished  { get; set; }
     public bool Pollinated { get; set; }
+    public bool PlantDead { get; set; }
     public Action<ActionType, bool> ActionHandler { get; set; }
 
     private GameObject _plantGameObj;
@@ -33,8 +34,30 @@ public class Tile : MonoBehaviour
 
     public void UseBee()
     {
-        if (!flourished || !_plantGameObj) return;
+        if (!Flourished || !_plantGameObj) return;
         _plantGameObj.GetComponent<TreePlant>().CreateBees();
+    }
+
+    public void DryPlant()
+    {
+        Pollinated = false;
+        PlantDead = true;
+        Flourished = false;
+        ActionHandler?.Invoke(ActionType.BEE, false);
+        ActionHandler?.Invoke(ActionType.SEED, false);
+        ActionHandler?.Invoke(ActionType.NECTAR, false);
+        ActionHandler?.Invoke(ActionType.SCYTHE, true);
+    }
+
+    public void KillPlant()
+    {
+        PlantDead = false;
+        Flourished = false;
+        Pollinated = false;
+        plantGrown = false;
+        planted = false;
+        ActionHandler?.Invoke(ActionType.SCYTHE, false);
+        Destroy(_plantGameObj);
     }
 
     public void UseSeed()
@@ -62,7 +85,7 @@ public class Tile : MonoBehaviour
         ActionHandler?.Invoke(ActionType.SEED, false);
         ActionHandler?.Invoke(ActionType.NECTAR, false);
         Pollinated = false;
-        flourished = false;
+        Flourished = false;
 
         LeanTween.move(seedGameObj, neighbour.transform.position, 3).setOnComplete(() =>
         {
@@ -109,7 +132,7 @@ public class Tile : MonoBehaviour
         _mapData.AddTile(this);
     }
 
-    public void InstantiatePlant()
+    private void InstantiatePlant()
     {
         var parentTransform = transform;
         _plantGameObj = Instantiate(
@@ -128,7 +151,7 @@ public class Tile : MonoBehaviour
 
     public void OnFlourished()
     {
-        flourished = true;
+        Flourished = true;
         ActionHandler?.Invoke(ActionType.BEE, true);
     }
 

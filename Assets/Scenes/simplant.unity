@@ -32383,7 +32383,7 @@ GameObject:
   - component: {fileID: 913383138}
   - component: {fileID: 913383137}
   m_Layer: 5
-  m_Name: sun.icon
+  m_Name: scythe.icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32429,7 +32429,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 11cb3c41c4c0f2a4ea5eaf571d8f2ec6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: edecc9c96a9291e4abc9d1a6cce4fe70, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -77112,7 +77112,7 @@ GameObject:
   - component: {fileID: 2031475851}
   - component: {fileID: 2031475854}
   m_Layer: 5
-  m_Name: ActionButtonSun
+  m_Name: ActionButtonScythe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77182,7 +77182,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2031475852}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 479773634}
+        m_TargetAssemblyTypeName: SimPlant, Assembly-CSharp
+        m_MethodName: UseScytheAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2031475852
 MonoBehaviour:
   m_ObjectHideFlags: 0

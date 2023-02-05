@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialGrowTime: 3
+  initialDieTime: 5
   flowerPrefab: {fileID: 8741012425841382816, guid: 03e8fee520fe35d4dbebe93fb4a1888c,
     type: 3}
   beePrefab: {fileID: 1859208889593802175, guid: ae951fd4e3dd9f446be1d36bacb72e04,
