@@ -16,6 +16,7 @@ public class Tile : MonoBehaviour
     public bool Pollinated { get; set; }
     public bool PlantDead { get; set; }
     public bool BudStarted { get; set; }
+    public bool FlowerStarted { get; set; }
 
     public Action<ActionType, bool> ActionHandler { get; set; }
 
@@ -35,6 +36,8 @@ public class Tile : MonoBehaviour
     public void UseNectar()
     {
         if (!plantGrown || !_plantGameObj) return;
+        FlowerStarted = true;
+        ActionHandler?.Invoke(ActionType.NECTAR, false);
         _plantGameObj.GetComponent<TreePlant>().CreateFlower();
     }
 
@@ -49,26 +52,20 @@ public class Tile : MonoBehaviour
     
     public Vector3 CreateBee(Bee bee, GameObject beeGameObj)
     {
-//        BeeGameObj = beeGameObj;
-        Vector3 moveDirection = Vector3.zero;
+        var moveDirection = Vector3.zero;
         if (!BeeGameObj) return moveDirection;
-        //_plantGameObj.GetComponent<TreePlant>().CreateBees();
         var neighborsTiles = FindNeighborsTiles();
 
         Tile destTile = null;
-        foreach (var tile in neighborsTiles) {
-            if (tile.Flourished) {
-                destTile = tile;
-                break;
-            }
-
-            // if (tile.planted) {
-            //     destTile = tile;
-            // }
+        foreach (var tile in neighborsTiles)
+        {
+            if (!tile.Flourished) continue;
+            destTile = tile;
+            break;
         }
 
         while (destTile == null) {
-            int random = Random.Range(0, neighborsTiles.Count);
+            var random = Random.Range(0, neighborsTiles.Count);
             if (neighborsTiles[random].type == TileType.PLAIN) {
                 destTile = neighborsTiles[random];
             } 
@@ -104,6 +101,7 @@ public class Tile : MonoBehaviour
         Pollinated = false;
         PlantDead = true;
         Flourished = false;
+        FlowerStarted = false;
         BudStarted = false;
         ActionHandler?.Invoke(ActionType.BEE, false);
         ActionHandler?.Invoke(ActionType.SEED, false);
@@ -118,6 +116,7 @@ public class Tile : MonoBehaviour
         Pollinated = false;
         plantGrown = false;
         BudStarted = false;
+        FlowerStarted = false;
         planted = false;
         ActionHandler?.Invoke(ActionType.SCYTHE, false);
         Destroy(_plantGameObj);

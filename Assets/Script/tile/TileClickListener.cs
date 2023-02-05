@@ -36,7 +36,7 @@ public class TileClickListener : MonoBehaviour
                 _simPlant.DisableAllActionButtons();
                 if (tile.planted)
                 {
-                    if (tile.plantGrown && !tile.PlantDead)
+                    if (tile.plantGrown && !tile.PlantDead && !tile.FlowerStarted)
                     {
                         _simPlant.EnableActionButton(ActionType.NECTAR);
                     }
