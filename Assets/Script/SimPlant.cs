@@ -5,23 +5,41 @@ using UnityEngine.UI;
 public class SimPlant : MonoBehaviour
 {
     public GameObject selectedTile;
+
     private readonly List<Button> _actionButtons = new();
+    private PlantCounter _plantCounter;
     private Button _actionButtonNectar;
     private Button _actionButtonBee;
     private Button _actionButtonSeed;
     private Button _actionButtonScythe;
+    private MapData _mapData;
+    private int _maxEdgeTiles = 0;
 
     private void Awake()
     {
+        _mapData = GameObject.Find("Map").GetComponent<MapData>();
         _actionButtonNectar = GameObject.Find("ActionButtonNectar").GetComponent<Button>();
         _actionButtonBee = GameObject.Find("ActionButtonBee").GetComponent<Button>();
         _actionButtonSeed = GameObject.Find("ActionButtonSeed").GetComponent<Button>();
         _actionButtonScythe = GameObject.Find("ActionButtonScythe").GetComponent<Button>();
+        _plantCounter = GameObject.Find("PlantCounter").GetComponent<PlantCounter>();
         
         _actionButtons.Add(_actionButtonNectar);
         _actionButtons.Add(_actionButtonBee);
         _actionButtons.Add(_actionButtonSeed);
         _actionButtons.Add(_actionButtonScythe);
+    }
+
+    private void Update()
+    {
+        if (_maxEdgeTiles == 0)
+        {
+            _maxEdgeTiles = _mapData.Tiles.FindAll(e => e.tile.type == TileType.PLAIN).Count;
+        }
+       
+        var plantedTiles = _mapData.Tiles.FindAll(e => e.tile.planted);
+        
+        _plantCounter.SetCounter(plantedTiles.Count, _maxEdgeTiles);
     }
 
 

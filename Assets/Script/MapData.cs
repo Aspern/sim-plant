@@ -52,7 +52,7 @@ public class MapData : MonoBehaviour
         { 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
     };
 
-    struct TileStruct {
+    public struct TileStruct {
         public int x;
         public int y;
         public Tile tile;
@@ -63,7 +63,7 @@ public class MapData : MonoBehaviour
             this.tile = tile;
         }
     }
-    private List<TileStruct> _tiles = new List<TileStruct>();
+    public List<TileStruct> Tiles { get; } = new();
     
     void Start() { }
 
@@ -84,11 +84,11 @@ public class MapData : MonoBehaviour
     public void AddTile(Tile tile)
     {
         var position = tile.gameObject.transform.position;
-        _tiles.Add(new TileStruct(((int)position.x), (int)position.z, tile));
+        Tiles.Add(new TileStruct(((int)position.x), (int)position.z, tile));
     }
 
     public Tile GetTileAt(int x, int y) {
-        foreach (var tileStruct in _tiles) {
+        foreach (var tileStruct in Tiles) {
             if (tileStruct.x == x && tileStruct.y == y) {
                 return tileStruct.tile;
             }
