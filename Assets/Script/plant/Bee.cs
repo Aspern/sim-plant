@@ -28,7 +28,7 @@ public class Bee : MonoBehaviour
                 tweening = false;
             });
         }
-        else if (tournAround)
+        else if (tournAround && _tileObj.planted)
         {
             if (!tweening)
             {
@@ -43,16 +43,14 @@ public class Bee : MonoBehaviour
             if (!tweening)
             {
                 Vector3 newDirection = _tileObj.CreateBee(this, gameObject);
-                Debug.Log(newDirection);
                 tweening = true;
                 tournAround = true;
                 if (newDirection != Vector3.zero)
                 {
                     var position = transform.position;
+                    gameObject.transform.LookAt(_tileObj.transform.position);
                     newDirection = new Vector3(position.x + newDirection.x, position.y,
                         position.z + newDirection.z);
-                    Debug.Log("current Location" + position.ToString());
-                    Debug.Log(newDirection.ToString());
                     LeanTween.move(gameObject, newDirection, 1f).setOnComplete(o1 => tweening = false);
                 }
                 else
@@ -65,7 +63,6 @@ public class Bee : MonoBehaviour
 
     public void OnNewTile(Tile tile)
     {
-        Debug.Log("New Tile set: " + tile);
         _tileObj = tile;
     }
 }

@@ -122,6 +122,7 @@ public class Tile : MonoBehaviour
 
 
         var neighborsTiles = FindNeighborsTiles();
+        Debug.Log(_compass);
         var neighbour = neighborsTiles[_compass.CurrentDirection];
 
         if (!neighbour) return;
