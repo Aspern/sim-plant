@@ -19,5 +19,6 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         mixer.SetFloat("MusicVol", Mathf.Log10(PlayerPrefs.GetFloat("MusicVol", 0.75f)) * 20);
+        PlayerPrefs.SetInt("finishedLevel", 1);
     }
 } 
