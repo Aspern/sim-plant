@@ -36,16 +36,6 @@ public class TileClickListener : MonoBehaviour
                 _simPlant.DisableAllActionButtons();
                 if (tile.planted)
                 {
-                 
-                    Debug.Log("----- DetectObjectWithRaycast ---------------");
-                    Debug.Log($"Pollinated={tile.Pollinated}");
-                    Debug.Log($"PlantDead={tile.PlantDead}");
-                    Debug.Log($"HasBee()={tile.HasBee()}");
-                    Debug.Log($"BudStarted={tile.BudStarted}");
-                    Debug.Log($"FlowerStarted={tile.FlowerStarted}");
-                    Debug.Log($"plantGrown={tile.plantGrown}");
-                    Debug.Log($"PlantDead={tile.PlantDead}");
-                    
                     if (tile.plantGrown && !tile.PlantDead && !tile.FlowerStarted)
                     {
                         _simPlant.EnableActionButton(ActionType.NECTAR);

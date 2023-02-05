@@ -82,11 +82,6 @@ public class Tile : MonoBehaviour
         bee.OnNewTile(destTile);
         destTile.BeeGameObj = beeGameObj;
         
-        Debug.Log("----- CreateBee ---------------");
-        Debug.Log($"Flourished={destTile.Flourished}");
-        Debug.Log($"BudStarted={destTile.BudStarted}");
-        Debug.Log($"HasBee()={destTile.HasBee()}");
-        
         if (destTile.Flourished && !destTile.BudStarted && destTile.HasBee())
         {
             destTile.ActionHandler?.Invoke(ActionType.BEE, true);
