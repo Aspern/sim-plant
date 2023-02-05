@@ -70,10 +70,7 @@ public class Tile : MonoBehaviour
                 destTile = neighborsTiles[random];
             } 
         }
-        
-        Debug.Log(neighborsTiles.Count);
 
-        Debug.Log("Inside if");
         var position = gameObject.transform.position;
         var x = (int) (position.x);
         var z = (int) (position.z);
