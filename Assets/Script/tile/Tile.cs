@@ -143,7 +143,6 @@ public class Tile : MonoBehaviour
 
 
         var neighborsTiles = FindNeighborsTiles();
-        Debug.Log(_compass);
         var neighbour = neighborsTiles[_compass.CurrentDirection];
 
         if (!neighbour) return;
@@ -157,7 +156,7 @@ public class Tile : MonoBehaviour
         var neighbourPos = neighbour.transform.position;
         LeanTween.move(seedGameObj, new Vector3(neighbourPos.x, neighbourPos.y - 0.5f, neighbourPos.z), 3).setOnComplete(() =>
         {
-            if (neighbour.type == TileType.PLAIN)
+            if (neighbour.type == TileType.PLAIN && !neighbour.planted)
 
             {
                 neighbour.planted = true;
