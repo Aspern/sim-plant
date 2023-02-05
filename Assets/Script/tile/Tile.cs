@@ -87,7 +87,8 @@ public class Tile : MonoBehaviour
         Pollinated = false;
         Flourished = false;
 
-        LeanTween.move(seedGameObj, neighbour.transform.position, 3).setOnComplete(() =>
+        var neighbourPos = neighbour.transform.position;
+        LeanTween.move(seedGameObj, new Vector3(neighbourPos.x, neighbourPos.y - 0.5f, neighbourPos.z), 3).setOnComplete(() =>
         {
             if (neighbour.type == TileType.PLAIN)
             {
@@ -99,6 +100,7 @@ public class Tile : MonoBehaviour
             plant.Pollinated = false;
             plant.RemoveFlower();
             ActionHandler?.Invoke(ActionType.NECTAR, true);
+            Destroy(seedGameObj);
         });
     }
 
