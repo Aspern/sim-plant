@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +6,7 @@ using UnityEngine.UI;
 public class SimPlant : MonoBehaviour
 {
     public GameObject selectedTile;
+    public GameObject selectionPrefab;
 
     private readonly List<Button> _actionButtons = new();
     private PlantCounter _plantCounter;
@@ -32,8 +32,11 @@ public class SimPlant : MonoBehaviour
         _actionButtons.Add(_actionButtonBee);
         _actionButtons.Add(_actionButtonSeed);
         _actionButtons.Add(_actionButtonScythe);
+    }
 
-        _selection = GameObject.Find("selection").GameObject();
+    private void Start()
+    {
+        _selection = Instantiate(selectionPrefab);
         _selection.SetActive(false);
     }
 
