@@ -15,6 +15,7 @@ public class Tile : MonoBehaviour
     public bool Flourished  { get; set; }
     public bool Pollinated { get; set; }
     public bool PlantDead { get; set; }
+
     public Action<ActionType, bool> ActionHandler { get; set; }
 
     private GameObject _plantGameObj;
@@ -27,7 +28,7 @@ public class Tile : MonoBehaviour
     private void Awake()
     {
         _mapData = GameObject.Find("Map").GetComponent<MapData>();
-        //_compass = GameObject.Find("Compass").GetComponent<Compass>();
+        _compass = GameObject.Find("Compass").GetComponent<Compass>();
     }
 
     public void UseNectar()
@@ -39,13 +40,13 @@ public class Tile : MonoBehaviour
     public void UseBee()
     {
         if (!BeeGameObj || !Flourished) return;
-        Pollinated = true;
+        _plantGameObj.GetComponent<TreePlant>().CreateBud();
         BeeGameObj.GetComponent<Bee>().flowerAttracted = true;
     }
     
     public Vector3 CreateBee(Bee bee, GameObject beeGameObj)
     {
-        BeeGameObj = beeGameObj;
+//        BeeGameObj = beeGameObj;
         Vector3 moveDirection = Vector3.zero;
         if (!BeeGameObj) return moveDirection;
         //_plantGameObj.GetComponent<TreePlant>().CreateBees();
@@ -58,9 +59,9 @@ public class Tile : MonoBehaviour
                 break;
             }
 
-            if (tile.planted) {
-                destTile = tile;
-            }
+            // if (tile.planted) {
+            //     destTile = tile;
+            // }
         }
 
         while (destTile == null) {
@@ -79,8 +80,17 @@ public class Tile : MonoBehaviour
         var positionNeighbor = destTile.transform.position;
         moveDirection = new Vector3((int)positionNeighbor.x - x, 0,
             (int)positionNeighbor.z - z);
+        BeeGameObj = null;
+        ActionHandler?.Invoke(ActionType.BEE, false);
         bee.OnNewTile(destTile);
+        destTile.BeeGameObj = beeGameObj;
+        destTile.ActionHandler?.Invoke(ActionType.BEE, true);
         return moveDirection;
+    }
+
+    public bool HasBee()
+    {
+        return BeeGameObj;
     }
 
     public void DryPlant()
@@ -145,7 +155,6 @@ public class Tile : MonoBehaviour
             }
         
             var plant = _plantGameObj.GetComponent<TreePlant>();
-            plant.Pollinated = false;
             plant.RemoveFlower();
             ActionHandler?.Invoke(ActionType.NECTAR, true);
             Destroy(seedGameObj);
@@ -227,4 +236,5 @@ public class Tile : MonoBehaviour
         Pollinated = true;
         ActionHandler?.Invoke(ActionType.SEED, true);
     }
+    
 }

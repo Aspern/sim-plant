@@ -100,5 +100,5 @@ MonoBehaviour:
   initialDieTime: 5
   flowerPrefab: {fileID: 8741012425841382816, guid: 03e8fee520fe35d4dbebe93fb4a1888c,
     type: 3}
-  beePrefab: {fileID: 1859208889593802175, guid: ae951fd4e3dd9f446be1d36bacb72e04,
+  budPrefab: {fileID: 6214912915316309151, guid: b0fd3d1c2a0dcbe429c95803805471d4,
     type: 3}

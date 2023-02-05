@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialRotateTime: 3
+  initialPollinatingTime: 3
 --- !u!82 &5067774286022737722
 AudioSource:
   m_ObjectHideFlags: 0

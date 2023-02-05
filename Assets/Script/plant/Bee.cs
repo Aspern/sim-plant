@@ -4,6 +4,7 @@ using UnityEngine;
 public class Bee : MonoBehaviour
 {
     public float initialRotateTime = 30f;
+    public float initialPollinatingTime = 10f;
     public bool flowerAttracted { get; set;}
     private Tile _tileObj;
     private void Start()
@@ -22,10 +23,8 @@ public class Bee : MonoBehaviour
             LeanTween.rotateAround(gameObject, new Vector3(0, 1, 0), 360, initialRotateTime).setOnComplete(o =>
             {
                 gameObject.GetComponentInParent<Tile>().OnPollinated();
-                gameObject.GetComponentInParent<TreePlant>().Pollinated = true;
-                //TODO do not destroy Bees
-                //gameObject.GetComponentInParent<TreePlant>().RemoveBees();
                 tweening = false;
+                flowerAttracted = false;
             });
         }
         else if (tournAround && _tileObj.planted)
@@ -34,7 +33,7 @@ public class Bee : MonoBehaviour
             {
                 tournAround = false;
                 tweening = true;
-                LeanTween.rotateAround(gameObject, new Vector3(0, 1, 0), 360, 10f).setOnComplete(o => tweening = false);
+                LeanTween.rotateAround(gameObject, new Vector3(0, 1, 0), 360, initialPollinatingTime).setOnComplete(o => tweening = false);
 
             }
         }

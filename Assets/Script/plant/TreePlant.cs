@@ -5,11 +5,10 @@ public class TreePlant : MonoBehaviour
     public float initialGrowTime = 60f;
     public float initialDieTime = 60f;
     public GameObject flowerPrefab;
-    public GameObject beePrefab;
-    public bool Pollinated { get; set; }
-
+    public GameObject budPrefab;
 
     private GameObject _flowerGameObj;
+    private GameObject _budGameObj;
     private LTDescr _dieAction;
 
     private void Awake()
@@ -23,6 +22,21 @@ public class TreePlant : MonoBehaviour
         {
             gameObject.GetComponentInParent<Tile>().OnFullyGrown();
         });
+    }
+
+    public void CreateBud()
+    {
+        if (_budGameObj) return;
+        
+        Destroy(_flowerGameObj);
+        
+        var parentTransform = transform;
+        _budGameObj = Instantiate(
+            budPrefab,
+            parentTransform.position,
+            Quaternion.identity,
+            parentTransform
+        );
     }
 
     public void CreateFlower()
