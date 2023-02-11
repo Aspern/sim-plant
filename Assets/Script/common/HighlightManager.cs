@@ -11,7 +11,7 @@ namespace Script.common
 
         private GameObject _selectionHighlight;
 
-        protected void Start()
+        protected virtual void Start()
         {
             CreateSelectHighlightObj();
         }
@@ -19,7 +19,6 @@ namespace Script.common
 
         protected void ChangeHighlightEffect(GameObject target)
         {
-            Debug.Log(target);
             if (!target)
             {
                 _selectionHighlight.SetActive(false);

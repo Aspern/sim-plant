@@ -7,7 +7,8 @@ namespace Script.tile
 
     public class PlantableTile : Tile
     {
-        [Header("Environment")] [Tooltip("If set to true the tile creates a plant at the beginning of the game.")]
+        [Header("Environment")] 
+        [Tooltip("If set to true the tile creates a plant at the beginning of the game.")]
         public bool startPlanted;
 
         [Tooltip("The 3D Model of the plant used for this tile.")]

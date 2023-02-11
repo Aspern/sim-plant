@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Script.common;
 using Script.plant;
 using Script.tile;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Script
@@ -9,13 +11,40 @@ namespace Script
     public class Environment : HighlightManager
     {
         public const string EnvironmentComponentName = "Environment";
+
+        [Header("Environment")]
+        [Tooltip("Time in seconds where environment updates game objects like bees etc.")]
+        public float updatePeriod = 3.0f;
+        [Tooltip("Number of bees that should be spawned on the map.")]
+        public int numberOfBees = 1;
+        [Tooltip("The 3D Model of the bee object.")]
+        public GameObject beePrefab;
         
         private GameObject _selectedTile;
         private HudController _controller;
+        private TileMap _map;
+        private float _nextActionTime;
+        private readonly List<GameObject> _bees = new();
 
         private void Awake()
         {
             _controller = GameObject.Find(HudController.HudControllerComponentName).GetComponent<HudController>();
+            _map = GameObject.Find(EnvironmentComponentName).GetComponent<TileMap>();
+        }
+        
+        
+        protected override void Start()
+        {
+            base.Start();
+            CreateBees();
+        }
+
+        private void Update()
+        {
+            if (!(Time.time > _nextActionTime)) return;
+            
+            _nextActionTime += updatePeriod;
+            UpdateEnvironment();
         }
 
         public void SelectionChange(GameObject tileGameObj)
@@ -28,6 +57,8 @@ namespace Script
                 plantableTile.OnAnimationFinished = null;
             }
             _selectedTile = tileGameObj;
+
+            var neighbors = _map.Neighbors(_selectedTile.transform.position);
         }
 
         public void ExecuteNectarActionForSelection()
@@ -37,6 +68,39 @@ namespace Script
             if (!plantableTile || !plantableTile.IsPlanted()) return;
             _controller.ActionMenu.DisableNectarButton();
             plantableTile.Plant.GetComponent<Plant>().Bloom();
+        }
+
+        private void UpdateEnvironment()
+        {
+            UpdateBeePositions();
+        }
+
+        private void UpdateBeePositions()
+        {
+            _bees.ForEach(bee =>
+            {
+                var randomPlantableTime = _map.RandomPlantableTile();
+                LeanTween.move(bee, randomPlantableTime.transform.position, 1.0f).setOnComplete(() =>
+                {
+                  
+                });
+            });
+        }
+
+        private void CreateBees()
+        {
+            for (var i = 0; i < numberOfBees; i++)
+            {
+                var randomPlantableTile = _map.RandomPlantableTile();
+                var bee = Instantiate(
+                    beePrefab,
+                    randomPlantableTile.transform.position,
+                    Quaternion.identity,
+                    transform
+                );
+                
+                _bees.Add(bee);
+            }
         }
     }
 }
