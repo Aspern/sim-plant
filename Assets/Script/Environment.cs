@@ -11,7 +11,8 @@ namespace Script
     {
         public const string EnvironmentComponentName = "Environment";
 
-        [Header("Environment")] [Tooltip("Time in seconds where environment updates game objects like bees etc.")]
+        [Header("Environment")]
+        [Tooltip("Time in seconds where environment updates game objects like bees etc.")]
         public float updatePeriod = 3.0f;
 
         [Tooltip("Number of bees that should be spawned on the map.")]
@@ -79,10 +80,27 @@ namespace Script
             _controller.ActionMenu.DisableBeeButton();
             plantableTile.Plant.GetComponent<Plant>().GrowBud();
         }
+        
+        
+        public void ExecuteSeedActionForSelection()
+        {
+            var plantableTile = _selectedTile.GetComponent<PlantableTile>();
+
+            if (!plantableTile || !plantableTile.IsPlanted()
+                               || !plantableTile.Plant.GetComponent<Plant>().IsBudGrown()) return;
+            
+            _controller.ActionMenu.DisableSeedButton();
+            var neighbors = _map.Neighbors(_selectedTile.transform.position);
+            var direction = _controller.Compass.CurrentDirection;
+            var target = neighbors[direction];
+            
+            plantableTile.Plant.GetComponent<Plant>().Seed(target);
+        }
 
         private void UpdateEnvironment()
         {
             UpdateBeePositions();
+            UpdatePlantCounter();
         }
 
         private void UpdateBeePositions()
@@ -99,6 +117,14 @@ namespace Script
 
                 bees.Move(target);
             });
+        }
+
+        private void UpdatePlantCounter()
+        {
+            var numPlantableTiles = _map.PlantableTiles().Count;
+            var numPlantedTiles = _map.PlantedTiles().Count;
+            
+            _controller.PlantCounter.SetCounter(numPlantedTiles, numPlantableTiles);
         }
 
         private void CreateBees()

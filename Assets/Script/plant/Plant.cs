@@ -1,4 +1,5 @@
 ﻿using System;
+using Script.tile;
 using UnityEngine;
 
 namespace Script.plant
@@ -13,9 +14,15 @@ namespace Script.plant
         [Tooltip("3D Model of the plants bud.")]
         public GameObject budPrefab;
         
+        [Tooltip("3D Model of the plants sed animation.")]
+        public GameObject seedPrefab;
+        
         [Header("Environment")]
         [Tooltip("Time in seconds a plant needs to grow.")]
         public float growDuration = 3f;
+        
+        [Tooltip("Time in seconds a the seed needs to enter a neighbour field.")]
+        public float seedAnimationDuration = 2f;
         
         public Action OnAnimationFinished { get; set; }
         public bool IsBlooming { get; private set; }
@@ -73,6 +80,7 @@ namespace Script.plant
             if (IsBudGrown()) return;
             IsBudGrowing = true;
             Destroy(Flower);
+            Flower = null;
             
             var parentTransform = transform;
             var position = parentTransform.position;
@@ -88,6 +96,27 @@ namespace Script.plant
                 IsBudGrowing = false;
                 OnAnimationFinished?.Invoke();
             };
+        }
+
+        public void Seed(GameObject target)
+        {
+            var parentTransform = transform;
+            var position = parentTransform.position;
+            var seed = Instantiate(
+                seedPrefab,
+                position,
+                Quaternion.identity,
+                parentTransform
+            );
+            
+            LeanTween.move(seed, target.transform.position, seedAnimationDuration).setOnComplete(() =>
+            {
+                Destroy(Bud);
+                Bud = null;
+                Destroy(seed);
+                target.GetComponent<PlantableTile>().Planting();
+                OnAnimationFinished?.Invoke();
+            });
         }
     }
 }

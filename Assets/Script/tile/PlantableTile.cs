@@ -33,7 +33,7 @@ namespace Script.tile
             return Plant != null;
         }
 
-        private void Planting()
+        public void Planting()
         {
             if (IsPlanted()) return;
             

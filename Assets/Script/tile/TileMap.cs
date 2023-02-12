@@ -52,14 +52,14 @@ namespace Script.tile
         {
             var neighbors = new Dictionary<string, GameObject>
             {
-                ["north"] = GetAt(new Vector3(position.x, position.y, position.z + TileSize)),
-                ["north_west"] = GetAt(new Vector3(position.x - TileSize, position.y, position.z + TileSize)),
-                ["west"] = GetAt(new Vector3(position.x - TileSize, position.y, position.z)),
-                ["south_west"] = GetAt(new Vector3(position.x - TileSize, position.y, position.z - TileSize)),
-                ["south"] = GetAt(new Vector3(position.x, position.y, position.z - TileSize)),
-                ["south_east"] = GetAt(new Vector3(position.x + TileSize, position.y, position.z - TileSize)),
-                ["east"] = GetAt(new Vector3(position.x + TileSize, position.y, position.z)),
-                ["north_east"] = GetAt(new Vector3(position.x + TileSize, position.y, position.z + TileSize))
+                [Compass.LabelNorth] = GetAt(new Vector3(position.x, position.y, position.z + TileSize)),
+                [Compass.LabelNorthWest] = GetAt(new Vector3(position.x - TileSize, position.y, position.z + TileSize)),
+                [Compass.LabelWest] = GetAt(new Vector3(position.x - TileSize, position.y, position.z)),
+                [Compass.LabelSouthWest] = GetAt(new Vector3(position.x - TileSize, position.y, position.z - TileSize)),
+                [Compass.LabelSouth] = GetAt(new Vector3(position.x, position.y, position.z - TileSize)),
+                [Compass.LabelSouthEast] = GetAt(new Vector3(position.x + TileSize, position.y, position.z - TileSize)),
+                [Compass.LabelEast] = GetAt(new Vector3(position.x + TileSize, position.y, position.z)),
+                [Compass.LabelNorthEast] = GetAt(new Vector3(position.x + TileSize, position.y, position.z + TileSize))
             };
 
             return neighbors;
@@ -87,11 +87,17 @@ namespace Script.tile
             return pollinableTiles[index];
         }
 
-        private List<GameObject> PlantableTiles()
+        public List<GameObject> PlantableTiles()
         {
             return _tiles.FindAll(e => e.Tile.GetComponent<PlantableTile>() != null)
                 .Select(e => e.Tile)
                 .ToList();
+        }
+        
+        public List<GameObject> PlantedTiles()
+        {
+            return PlantableTiles()
+                .FindAll(t => t.GetComponent<PlantableTile>().IsPlanted());
         }
     }
 }

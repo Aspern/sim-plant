@@ -100,4 +100,6 @@ MonoBehaviour:
     type: 3}
   budPrefab: {fileID: 6214912915316309151, guid: 8e1a2c8a59fd40de8759f5944f706cb6,
     type: 3}
+  seedPrefab: {fileID: 7863879139667512467, guid: c7da8c037fed58649a7c83e77c389702,
+    type: 3}
   growDuration: 3
