@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Script.plant;
 using UnityEngine;
 using Random = System.Random;
 
@@ -68,11 +69,25 @@ namespace Script.tile
         {
             var plantableTiles = PlantableTiles();
 
+            if (plantableTiles.Count == 0) return null;
+
             var index = new Random().Next(0, plantableTiles.Count - 1);
             return plantableTiles[index];
         }
 
-        public List<GameObject> PlantableTiles()
+        public GameObject RandomPollinableTile()
+        {
+            var pollinableTiles = PlantableTiles()
+                .FindAll(t => t.GetComponent<PlantableTile>().Plant != null)
+                .FindAll(t => t.GetComponent<PlantableTile>().Plant.GetComponent<Plant>().IsBloomed());
+            
+            if (pollinableTiles.Count == 0) return null;
+            
+            var index = new Random().Next(0, pollinableTiles.Count - 1);
+            return pollinableTiles[index];
+        }
+
+        private List<GameObject> PlantableTiles()
         {
             return _tiles.FindAll(e => e.Tile.GetComponent<PlantableTile>() != null)
                 .Select(e => e.Tile)

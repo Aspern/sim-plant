@@ -10,13 +10,19 @@ namespace Script.plant
         [Tooltip("3D Model of the plants flower.")]
         public GameObject flowerPrefab;
         
+        [Tooltip("3D Model of the plants bud.")]
+        public GameObject budPrefab;
+        
         [Header("Environment")]
         [Tooltip("Time in seconds a plant needs to grow.")]
         public float growDuration = 3f;
         
         public Action OnAnimationFinished { get; set; }
-        public GameObject Flower { get; private set; }
         public bool IsBlooming { get; private set; }
+        public bool IsBudGrowing  { get; private set; }
+
+        private GameObject Flower { get; set; }
+        private GameObject Bud { get; set; }
         
         private void Awake()
         {
@@ -36,6 +42,11 @@ namespace Script.plant
             return Flower != null;
         }
 
+        public bool IsBudGrown()
+        {
+            return Bud != null;
+        }
+
         public void Bloom()
         {
             if (IsBloomed()) return;
@@ -53,6 +64,28 @@ namespace Script.plant
             {
                 Flower = flower;
                 IsBlooming = false;
+                OnAnimationFinished?.Invoke();
+            };
+        }
+
+        public void GrowBud()
+        {
+            if (IsBudGrown()) return;
+            IsBudGrowing = true;
+            Destroy(Flower);
+            
+            var parentTransform = transform;
+            var position = parentTransform.position;
+            var bud = Instantiate(
+                budPrefab,
+                position,
+                Quaternion.identity,
+                parentTransform
+            );
+            bud.GetComponent<Bud>().OnAnimationFinished = () =>
+            {
+                Bud = bud;
+                IsBudGrowing = false;
                 OnAnimationFinished?.Invoke();
             };
         }

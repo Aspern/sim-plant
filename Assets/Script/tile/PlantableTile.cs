@@ -16,6 +16,7 @@ namespace Script.tile
 
         public Action<PlantableTile> OnAnimationFinished { get; set; }
         public GameObject Plant { get; private set; }
+        public bool BeesPresent { get; set; }
 
         protected override void Start()
         {

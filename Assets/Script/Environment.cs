@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Script.animal;
 using Script.common;
 using Script.plant;
 using Script.tile;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Script
@@ -12,14 +11,15 @@ namespace Script
     {
         public const string EnvironmentComponentName = "Environment";
 
-        [Header("Environment")]
-        [Tooltip("Time in seconds where environment updates game objects like bees etc.")]
+        [Header("Environment")] [Tooltip("Time in seconds where environment updates game objects like bees etc.")]
         public float updatePeriod = 3.0f;
+
         [Tooltip("Number of bees that should be spawned on the map.")]
         public int numberOfBees = 1;
+
         [Tooltip("The 3D Model of the bee object.")]
         public GameObject beePrefab;
-        
+
         private GameObject _selectedTile;
         private HudController _controller;
         private TileMap _map;
@@ -31,8 +31,8 @@ namespace Script
             _controller = GameObject.Find(HudController.HudControllerComponentName).GetComponent<HudController>();
             _map = GameObject.Find(EnvironmentComponentName).GetComponent<TileMap>();
         }
-        
-        
+
+
         protected override void Start()
         {
             base.Start();
@@ -42,7 +42,7 @@ namespace Script
         private void Update()
         {
             if (!(Time.time > _nextActionTime)) return;
-            
+
             _nextActionTime += updatePeriod;
             UpdateEnvironment();
         }
@@ -56,9 +56,8 @@ namespace Script
                 // Remove old listeners from further selection.
                 plantableTile.OnAnimationFinished = null;
             }
-            _selectedTile = tileGameObj;
 
-            var neighbors = _map.Neighbors(_selectedTile.transform.position);
+            _selectedTile = tileGameObj;
         }
 
         public void ExecuteNectarActionForSelection()
@@ -70,6 +69,17 @@ namespace Script
             plantableTile.Plant.GetComponent<Plant>().Bloom();
         }
 
+        public void ExecuteBeeActionForSelection()
+        {
+            var plantableTile = _selectedTile.GetComponent<PlantableTile>();
+
+            if (!plantableTile || !plantableTile.IsPlanted()
+                               || !plantableTile.Plant.GetComponent<Plant>().IsBloomed()) return;
+            
+            _controller.ActionMenu.DisableBeeButton();
+            plantableTile.Plant.GetComponent<Plant>().GrowBud();
+        }
+
         private void UpdateEnvironment()
         {
             UpdateBeePositions();
@@ -79,11 +89,15 @@ namespace Script
         {
             _bees.ForEach(bee =>
             {
-                var randomPlantableTime = _map.RandomPlantableTile();
-                LeanTween.move(bee, randomPlantableTime.transform.position, 1.0f).setOnComplete(() =>
+                var bees = bee.GetComponent<Bees>();
+                var target = _map.RandomPollinableTile();
+
+                if (target == null)
                 {
-                  
-                });
+                    target = _map.RandomPlantableTile();
+                }
+
+                bees.Move(target);
             });
         }
 
@@ -98,7 +112,15 @@ namespace Script
                     Quaternion.identity,
                     transform
                 );
-                
+
+                bee.GetComponent<Bees>().OnAnimationFinished ??= (plantableTile) =>
+                {
+                    if (_selectedTile && _selectedTile.GetComponent<PlantableTile>() == plantableTile)
+                    {
+                        _controller.ActionMenu.CheckActionButtonsInteractable(plantableTile);
+                    }
+                };
+
                 _bees.Add(bee);
             }
         }

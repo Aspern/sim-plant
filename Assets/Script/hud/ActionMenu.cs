@@ -41,6 +41,11 @@ namespace Script.hud
         {
             nectarButton.interactable = false;
         }
+        
+        public void DisableBeeButton()
+        {
+            beeButton.interactable = false;
+        }
 
         private static bool IsNectarButtonInteractable(PlantableTile tile)
         {
@@ -48,15 +53,18 @@ namespace Script.hud
                
             return tile.IsPlanted() 
                    && !plant.IsBlooming 
-                   && !plant.IsBloomed();
+                   && !plant.IsBloomed()
+                   && !plant.IsBudGrowing
+                   && !plant.IsBudGrown();
         }
 
         private static bool IsBeeButtonInteractable(PlantableTile tile)
         {
             var plant = tile.Plant.GetComponent<Plant>();
-            
-            return tile.IsPlanted() 
-                   && plant.IsBloomed();
+
+            return tile.IsPlanted()
+                   && plant.IsBloomed()
+                   && tile.BeesPresent;
         }
     }
 }

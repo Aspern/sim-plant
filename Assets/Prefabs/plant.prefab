@@ -98,4 +98,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flowerPrefab: {fileID: 8741012425841382816, guid: 03e8fee520fe35d4dbebe93fb4a1888c,
     type: 3}
+  budPrefab: {fileID: 6214912915316309151, guid: 8e1a2c8a59fd40de8759f5944f706cb6,
+    type: 3}
   growDuration: 3
