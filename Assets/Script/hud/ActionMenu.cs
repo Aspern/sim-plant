@@ -23,6 +23,7 @@ namespace Script.hud
                nectarButton.interactable = IsNectarButtonInteractable(tile);
                beeButton.interactable = IsBeeButtonInteractable(tile);
                seedButton.interactable = IsSeedButtonInteractable(tile);
+               scytheButton.interactable = IsSScytheButtonInteractable(tile);
             }
             else
             {
@@ -52,6 +53,11 @@ namespace Script.hud
         {
             seedButton.interactable = false;
         }
+        
+        public void DisableScytheButton()
+        {
+            scytheButton.interactable = false;
+        }
 
         private static bool IsNectarButtonInteractable(PlantableTile tile)
         {
@@ -61,7 +67,8 @@ namespace Script.hud
                    && !plant.IsBlooming 
                    && !plant.IsBloomed()
                    && !plant.IsBudGrowing
-                   && !plant.IsBudGrown();
+                   && !plant.IsBudGrown()
+                   && !plant.IsWithered;
         }
 
         private static bool IsBeeButtonInteractable(PlantableTile tile)
@@ -79,6 +86,14 @@ namespace Script.hud
 
             return tile.IsPlanted()
                    && plant.IsBudGrown();
+        }
+
+        private static bool IsSScytheButtonInteractable(PlantableTile tile)
+        {
+            var plant = tile.Plant.GetComponent<Plant>();
+
+            return tile.IsPlanted()
+                   && plant.IsWithered;
         }
     }
 }

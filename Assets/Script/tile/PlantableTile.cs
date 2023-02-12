@@ -22,10 +22,8 @@ namespace Script.tile
         {
             base.Start();
 
-            if (startPlanted)
-            {
-                Planting();
-            }
+            if (!startPlanted) return;
+            Planting();
         }
 
         public bool IsPlanted()
@@ -45,11 +43,18 @@ namespace Script.tile
                 Quaternion.identity,
                 parentTransform
             );
+            Plant = plant;
             plant.GetComponent<Plant>().OnAnimationFinished = () =>
             {
-                Plant = plant;
                 OnAnimationFinished?.Invoke(this);
             };
+        }
+
+        public void DestroyPlant()
+        {
+            Destroy(Plant);
+            Plant = null;
+            OnAnimationFinished?.Invoke(this);
         }
     }
 }

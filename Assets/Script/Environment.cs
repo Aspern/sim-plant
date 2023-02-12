@@ -4,6 +4,7 @@ using Script.common;
 using Script.plant;
 using Script.tile;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Script
 {
@@ -96,11 +97,23 @@ namespace Script
             
             plantableTile.Plant.GetComponent<Plant>().Seed(target);
         }
+        
+        public void ExecuteScytheActionForSelection()
+        {
+            var plantableTile = _selectedTile.GetComponent<PlantableTile>();
+
+            if (!plantableTile || !plantableTile.IsPlanted()
+                               || !plantableTile.Plant.GetComponent<Plant>().IsWithered) return;
+            
+            _controller.ActionMenu.DisableScytheButton();
+
+            plantableTile.DestroyPlant();
+        }
 
         private void UpdateEnvironment()
         {
             UpdateBeePositions();
-            UpdatePlantCounter();
+            CheckWinningConditions();
         }
 
         private void UpdateBeePositions()
@@ -119,10 +132,18 @@ namespace Script
             });
         }
 
-        private void UpdatePlantCounter()
+        private void CheckWinningConditions()
         {
             var numPlantableTiles = _map.PlantableTiles().Count;
             var numPlantedTiles = _map.PlantedTiles().Count;
+
+            if (numPlantedTiles == 0)
+            {
+                SceneManager.LoadScene("GameOverScene");
+            } else if (numPlantedTiles == numPlantableTiles)
+            {
+                SceneManager.LoadScene("WinScene");
+            }
             
             _controller.PlantCounter.SetCounter(numPlantedTiles, numPlantableTiles);
         }
