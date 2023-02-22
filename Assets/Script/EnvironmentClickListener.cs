@@ -10,11 +10,16 @@ namespace Script
         private Environment _environment;
         private HudController _controller;
 
+        private Plane _ground = new Plane(Vector3.up, new Vector3(0f,0.5f, 0f));
+        private TileMap _map;
+
         private void Awake()
         {
             _camera = Camera.main;
             _environment = GameObject.Find(Environment.EnvironmentComponentName).GetComponent<Environment>();
             _controller = GameObject.Find(HudController.HudControllerComponentName).GetComponent<HudController>();
+
+            _map = GameObject.Find(Environment.EnvironmentComponentName).GetComponent<TileMap>();
         }
 
         private void Update()
@@ -29,16 +34,17 @@ namespace Script
             // ignore UI clicks
             if (EventSystem.current.IsPointerOverGameObject()) return;
             
-            var ray = _camera.ScreenPointToRay(Input.mousePosition);
-
-            // Ignore if no raycast hit was found
-            if (!Physics.Raycast(ray, out var hit)) return;
             
-            var tileGameObj = hit.collider.gameObject;
+            var ray = _camera.ScreenPointToRay(Input.mousePosition);
+            
+            float distance = 0.0f;
 
-            if (tileGameObj.GetComponent<Tile>())
-            {
-                HandleTileMouseClick(tileGameObj);
+            if (_ground.Raycast(ray, out distance)) {
+                Vector3 hitPoint = ray.GetPoint(distance);
+                GameObject detectedObject = _map.GetAt(hitPoint);
+                if (detectedObject) {
+                    HandleTileMouseClick(detectedObject); 
+                }
             }
         }
 

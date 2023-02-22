@@ -21,10 +21,25 @@ namespace Script.tile
         }
     }
 
+
     public class TileMap : MonoBehaviour
     {
         private readonly List<TileData> _tiles = new();
         private const int TileSize = 1;
+        
+        
+        public int XMin { get; private set; }
+        public int XMax { get; private set; }
+        public int YMin { get; private set; }
+        public int YMax { get; private set; }
+
+
+        private void Awake() {
+            XMin = Int32.MaxValue;
+            XMax = Int32.MinValue;
+            YMin = Int32.MaxValue;
+            YMax = Int32.MinValue;
+        }
 
         public void Add(GameObject tileGameObj)
         {
@@ -36,15 +51,40 @@ namespace Script.tile
 
             // integer positions are easier for calculation purposes
             _tiles.Add(new TileData(
-                (int) x,
-                (int) y,
+                Mathf.FloorToInt(x),
+                Mathf.FloorToInt(y),
                 tileGameObj
             ));
+            
+            CheckBorders(x,y);
         }
 
-        private GameObject GetAt(Vector3 position)
+        private void CheckBorders(float x, float y) {
+            int left = Mathf.FloorToInt(x);
+            int right = Mathf.CeilToInt(x);
+            int bottom = Mathf.FloorToInt(y);
+            int top = Mathf.CeilToInt(y);
+
+            if (left < XMin) {
+                XMin = left;
+            }
+
+            if (right > XMax) {
+                XMax = right;
+            }
+
+            if (bottom < YMin) {
+                YMin = bottom;
+            }
+
+            if (top > YMax) {
+                YMax = top;
+            }
+        }
+
+        public GameObject GetAt(Vector3 position)
         {
-            return (from tile in _tiles where tile.X == (int) position.x && tile.Y == (int) position.z select tile.Tile)
+            return (from tile in _tiles where tile.X == Mathf.FloorToInt(position.x) && tile.Y == Mathf.FloorToInt(position.z) select tile.Tile)
                 .FirstOrDefault();
         }
 
