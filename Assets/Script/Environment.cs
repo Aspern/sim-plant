@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Script.animal;
+﻿using Script.animal;
 using Script.common;
 using Script.plant;
 using Script.tile;
@@ -24,7 +23,6 @@ namespace Script
         private HudController _controller;
         private TileMap _map;
         private float _nextActionTime;
-        private readonly List<GameObject> _bees = new();
 
         private void Awake()
         {
@@ -111,24 +109,7 @@ namespace Script
 
         private void UpdateEnvironment()
         {
-            UpdateBeePositions();
             CheckWinningConditions();
-        }
-
-        private void UpdateBeePositions()
-        {
-            _bees.ForEach(bee =>
-            {
-                var bees = bee.GetComponent<Bees>();
-                var target = _map.RandomPollinableTile();
-
-                if (target == null)
-                {
-                    target = _map.RandomPlantableTile();
-                }
-
-                bees.Move(target);
-            });
         }
 
         private void CheckWinningConditions()
@@ -166,8 +147,6 @@ namespace Script
                         _controller.ActionMenu.CheckActionButtonsInteractable(plantableTile);
                     }
                 };
-
-                _bees.Add(bee);
             }
         }
     }
