@@ -1,19 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class Flower : MonoBehaviour
+namespace Script.plant
 {
-    public float initialGrowTime = 20f;
-
-    private void Awake()
+    public class Flower : MonoBehaviour
     {
-        transform.localScale = new Vector3(0.5f, 1, 0.5f);
-    }
+        [Header("Environment")]
+        [Tooltip("Time in seconds a flower needs to grow.")]
+        public float growDuration = 3f;
 
-    private void Start()
-    {
-        LeanTween.scale(gameObject, new Vector3(1, 1, 1), initialGrowTime).setOnComplete(o =>
+        public Action OnAnimationFinished { get; set; }
+        
+        private void Awake()
         {
-            gameObject.GetComponentInParent<Tile>().OnFlourished();
-        });
+            transform.localScale = new Vector3(0.5f, 1, 0.5f);
+        }
+
+        private void Start()
+        {
+            LeanTween.scale(gameObject, new Vector3(1, 1, 1), growDuration).setOnComplete(_ =>
+            {
+                OnAnimationFinished();
+            });
+        }
     }
 }
