@@ -15,14 +15,6 @@ namespace Script.plant
      */
     public class Plant : MonoBehaviour
     {
-        [Header("General")] 
-        [Tooltip("3D Model of the plants flower.")]
-        public GameObject flowerPrefab;
-        [Tooltip("3D Model of the plants bud.")]
-        public GameObject budPrefab;
-        [Tooltip("3D Model of the plants sed animation.")]
-        public GameObject seedPrefab;
-        
         [Header("Environment")] 
         [Tooltip("Time in seconds a plant needs to grow.")]
         public float growDuration = 3f;
@@ -36,6 +28,9 @@ namespace Script.plant
         public bool IsBudGrowing { get; private set; }
         public bool IsWithered { get; private set; }
         
+        private GameObject _flowerPrefab;
+        private GameObject _budPrefab;
+        private GameObject _seedPrefab;
         private GameObject Flower { get; set; }
         private GameObject Bud { get; set; }
         private LTDescr _witherAnimation;
@@ -43,6 +38,10 @@ namespace Script.plant
         private void Awake()
         {
             transform.localScale = new Vector3(0, 0.5f, 0);
+
+            _flowerPrefab = Resources.Load<GameObject>("Prefabs/flower");
+            _budPrefab = Resources.Load<GameObject>("Prefabs/bud");
+            _seedPrefab = Resources.Load<GameObject>("Prefabs/seed");
         }
 
         private void Start()
@@ -73,7 +72,7 @@ namespace Script.plant
             var parentTransform = transform;
             var position = parentTransform.position;
             var flower = Instantiate(
-                flowerPrefab,
+                _flowerPrefab,
                 position,
                 Quaternion.identity,
                 parentTransform
@@ -96,7 +95,7 @@ namespace Script.plant
             var parentTransform = transform;
             var position = parentTransform.position;
             var bud = Instantiate(
-                budPrefab,
+                _budPrefab,
                 position,
                 Quaternion.identity,
                 parentTransform
@@ -114,7 +113,7 @@ namespace Script.plant
             var parentTransform = transform;
             var position = parentTransform.position;
             var seed = Instantiate(
-                seedPrefab,
+                _seedPrefab,
                 position,
                 Quaternion.identity,
                 parentTransform

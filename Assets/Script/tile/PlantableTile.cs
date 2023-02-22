@@ -10,13 +10,17 @@ namespace Script.tile
         [Header("Environment")] 
         [Tooltip("If set to true the tile creates a plant at the beginning of the game.")]
         public bool startPlanted;
-
-        [Tooltip("The 3D Model of the plant used for this tile.")]
-        public GameObject plantPrefab;
-
+        
+        private GameObject _plantPrefab;
         public Action<PlantableTile> OnAnimationFinished { get; set; }
         public GameObject Plant { get; private set; }
         public bool BeesPresent { get; set; }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _plantPrefab = Resources.Load<GameObject>("Prefabs/plant");
+        }
 
         protected override void Start()
         {
@@ -38,7 +42,7 @@ namespace Script.tile
             var parentTransform = transform;
             var position = parentTransform.position;
             var plant = Instantiate(
-                plantPrefab,
+                _plantPrefab,
                 position,
                 Quaternion.identity,
                 parentTransform

@@ -18,10 +18,8 @@ namespace Script
 
         [Tooltip("Number of bees that should be spawned on the map.")]
         public int numberOfBees = 1;
-
-        [Tooltip("The 3D Model of the bee object.")]
-        public GameObject beePrefab;
-
+        
+        private GameObject _beePrefab;
         private GameObject _selectedTile;
         private HudController _controller;
         private TileMap _map;
@@ -30,6 +28,7 @@ namespace Script
 
         private void Awake()
         {
+            _beePrefab = Resources.Load<GameObject>("Prefabs/bees");
             _controller = GameObject.Find(HudController.HudControllerComponentName).GetComponent<HudController>();
             _map = GameObject.Find(EnvironmentComponentName).GetComponent<TileMap>();
         }
@@ -154,7 +153,7 @@ namespace Script
             {
                 var randomPlantableTile = _map.RandomPlantableTile();
                 var bee = Instantiate(
-                    beePrefab,
+                    _beePrefab,
                     randomPlantableTile.transform.position,
                     Quaternion.identity,
                     transform
