@@ -9,6 +9,7 @@ namespace Script {
         private const float CAMERA_MIN_HEIGHT = 2f;
         private const float CAMERA_MAX_HEIGHT = 6.5f;
         private const float CAMERA_KEYBOAD_MOVE_SPEED = 5.0f;
+        private const float CAMERA_KEYBOAD_ZOOM_SPEED = 5.0f;
         private const float CAMERA_KEYBOAD_ROTATE_SPEED = 90.0f;
 
         private Plane _ground = new Plane(Vector3.up, new Vector3(0f, 0.5f, 0f));
@@ -26,12 +27,34 @@ namespace Script {
         }
 
         void Update() {
-            ScrollCamera();
+            ZoomCamera();
             MoveCamera();
             RotateCamera();
         }
 
-        private void ScrollCamera() {
+        private void ZoomCamera() {
+            ZoomCameraWithKeyboard();
+            ZoomCameraWithMouse();
+        }
+        
+        private void ZoomCameraWithKeyboard() {
+            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) {
+                var newPosition = _camera.transform.position;
+                if(Input.GetKey(KeyCode.DownArrow)) {
+                    newPosition -= _camera.transform.forward * CAMERA_KEYBOAD_ZOOM_SPEED * Time.deltaTime;
+                }
+                if(Input.GetKey(KeyCode.UpArrow))
+                {
+                    newPosition += _camera.transform.forward * CAMERA_KEYBOAD_ZOOM_SPEED * Time.deltaTime;
+                }
+
+                if (newPosition.y >= CAMERA_MIN_HEIGHT && newPosition.y <= CAMERA_MAX_HEIGHT) {
+                    _camera.transform.position = newPosition;
+                }
+            }
+        }
+        
+        private void ZoomCameraWithMouse() {
             var amount = Input.GetAxis("Mouse ScrollWheel");
             if (amount != 0f) {
                 var oldPosition = _camera.transform.position;
